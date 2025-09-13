@@ -5,7 +5,7 @@ import { StatsCards } from "./components/stats-cards";
 
 function App() {
 	return (
-		<div className="h-screen w-screen bg-zinc-900">
+		<div className="bg-zinc-900 min-h-screen w-full">
 			<div className="max-w-7xl mx-auto py-10 space-y-4">
 				<Header />
 				<StatsCards />
