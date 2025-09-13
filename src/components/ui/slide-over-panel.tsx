@@ -77,7 +77,7 @@ export function SlideOverPanel({
                     {title && (
                       <div className="px-6">
                         <div className="flex items-center justify-between py-4">
-                          <DialogTitle className="text-lg font-semibold text-input">
+                          <DialogTitle className="text-xl font-semibold text-input">
                             {title}
                           </DialogTitle>
                           <button
@@ -143,7 +143,7 @@ export function SlideOverFooter({
   className?: string
 }) {
   return (
-    <div className={cn('mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end', className)}>
+    <div className={cn('mt-4 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end', className)}>
       {children}
     </div>
   )

@@ -4,9 +4,13 @@ import { LeadStatus } from "@/types/leads";
 import type { EditLeadSchema } from "@/utils/schemas/lead";
 import { getScoreColor } from "@/utils/score-colors";
 import { getStatusColor } from "@/utils/status-colors";
-import { Bullseye } from "./icons/bullseye";
 import { Envelope } from "./icons/envelope";
+import { Pencil } from "./icons/pencil";
+import { SdCard } from "./icons/pencil copy";
+import { People } from "./icons/people";
+import { X } from "./icons/x";
 import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
 import { CardItem, InformationCard } from "./ui/information-card";
 import { InlineEditEmail, InlineEditSelect, validateFormComplete } from "./ui/inline-edit";
 import { SlideOverBody, SlideOverFooter, SlideOverPanel } from "./ui/slide-over-panel";
@@ -101,13 +105,13 @@ export function LeadInformationPanel({
 											error={errors.email}
 										/>
 									) : (
-										<p className="text-input">{selectedLead.email}</p>
+										<p className="text-base font-medium text-input">{selectedLead.email}</p>
 									)}
 								</div>
 								<CardItem label="Company" content={selectedLead.company} />
 							</InformationCard>
 
-							<InformationCard title="Lead Status" icon={<Bullseye className="w-5 h-5" />}>
+							<InformationCard title="Lead Status" icon={<People className="w-5 h-5" />}>
 								<CardItem label="Source" content={selectedLead.source} />
 								<div className="space-y-1">
 									<p className="text-sm text-muted-foreground">Status</p>
@@ -134,31 +138,33 @@ export function LeadInformationPanel({
 					</SlideOverBody>
 
 					<SlideOverFooter>
-						<div className="flex justify-end gap-3">
+						<div className="flex justify-end gap-3 w-full">
 							{isEditing ? (
 								<>
-									<button
+									<Button
+										className="flex-1"
 										type="button"
 										onClick={handleCancelEdit}
-										className="px-4 py-2 text-sm bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/90"
+										variant="secondary"
 									>
+										<X className="w-6 h-6" />
 										Cancel
-									</button>
-									<button
-										type="submit"
-										className="px-4 py-2 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
-									>
+									</Button>
+									<Button className="flex-1" type="submit" variant="default">
+										<SdCard className="w-5 h-5" />
 										Save Changes
-									</button>
+									</Button>
 								</>
 							) : (
-								<button
-									type="button"
+								<Button
+									className="w-full"
 									onClick={handleStartEdit}
-									className="px-4 py-2 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+									variant="default"
+									type="button"
 								>
-									Edit
-								</button>
+									<Pencil className="w-5 h-5" />
+									Edit Lead Details
+								</Button>
 							)}
 						</div>
 					</SlideOverFooter>
