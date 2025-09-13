@@ -1,6 +1,7 @@
 import { useState } from "react";
 import leadsData from "@/assets/leads.json";
 import type { Lead, LeadStatus } from "@/types/leads";
+import { getScoreColor } from "@/utils/score-colors";
 import { getStatusColor } from "@/utils/status-colors";
 import { ArrowDownUp } from "./icons/arrow-down-up";
 import { LeadInformationPanel } from "./lead-information-panel";
@@ -54,7 +55,11 @@ export function LeadsTable() {
 								<TableCell>
 									<Badge variant="outline">{lead.source}</Badge>
 								</TableCell>
-								<TableCell>{lead.score}</TableCell>
+								<TableCell>
+									<Badge className={getScoreColor(lead.score)} variant="default">
+										{lead.score}
+									</Badge>
+								</TableCell>
 								<TableCell>
 									<Badge className={getStatusColor[lead.status as LeadStatus]} variant="default">
 										{lead.status}

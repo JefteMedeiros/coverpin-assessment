@@ -2,30 +2,27 @@ import { useState } from "react";
 import type { Lead } from "@/types/leads";
 import { LeadStatus } from "@/types/leads";
 import type { EditLeadSchema } from "@/utils/schemas/lead";
+import { getScoreColor } from "@/utils/score-colors";
 import { getStatusColor } from "@/utils/status-colors";
 import { Bullseye } from "./icons/bullseye";
 import { Envelope } from "./icons/envelope";
 import { Badge } from "./ui/badge";
 import { CardItem, InformationCard } from "./ui/information-card";
-import {
-	InlineEditEmail,
-	InlineEditSelect,
-	validateFormComplete,
-} from "./ui/inline-edit";
+import { InlineEditEmail, InlineEditSelect, validateFormComplete } from "./ui/inline-edit";
 import { SlideOverBody, SlideOverFooter, SlideOverPanel } from "./ui/slide-over-panel";
 
 interface Props {
 	isSlideOverOpen: boolean;
 	handleCloseSlideOver: () => void;
 	selectedLead: Lead | null;
-	onUpdateLead?: (leadId: number, updates: Partial<Pick<Lead, "email" | "status">>) => void;
+	// onUpdateLead?: (leadId: number, updates: Partial<Pick<Lead, "email" | "status">>) => void;
 }
 
 export function LeadInformationPanel({
 	isSlideOverOpen,
 	handleCloseSlideOver,
 	selectedLead,
-	onUpdateLead,
+	// onUpdateLead,
 }: Props) {
 	const [isEditing, setIsEditing] = useState(false);
 
@@ -128,10 +125,11 @@ export function LeadInformationPanel({
 								</div>
 								<div className="space-y-1">
 									<p className="text-sm text-muted-foreground">Score</p>
-									<p>{selectedLead.score}</p>
+									<Badge className={getScoreColor(selectedLead.score)} variant="default">
+										{selectedLead.score}
+									</Badge>
 								</div>
 							</InformationCard>
-
 						</div>
 					</SlideOverBody>
 
