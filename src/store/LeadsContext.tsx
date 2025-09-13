@@ -47,11 +47,9 @@ export function LeadsProvider({ children }: { children: React.ReactNode }) {
 		setSortDescending((prev) => !prev);
 	}, []);
 
-	// Apply filtering and sorting to the data
 	const filteredAndSortedData = useMemo(() => {
 		let filtered = rawData;
 
-		// Apply search filter
 		if (searchTerm) {
 			filtered = filtered.filter(
 				(lead) =>
@@ -60,12 +58,10 @@ export function LeadsProvider({ children }: { children: React.ReactNode }) {
 			);
 		}
 
-		// Apply status filter
 		if (statusFilter !== "ALL") {
 			filtered = filtered.filter((lead) => lead.status === statusFilter);
 		}
 
-		// Apply sorting by score
 		filtered = filtered.sort((a, b) => {
 			return sortDescending ? b.score - a.score : a.score - b.score;
 		});

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLeads } from "@/store/LeadsContext";
 import type { Lead } from "@/types/leads";
 import { LeadStatus } from "@/types/leads";
 import type { EditLeadSchema } from "@/utils/schemas/lead";
@@ -20,15 +21,14 @@ interface Props {
 	isSlideOverOpen: boolean;
 	handleCloseSlideOver: () => void;
 	selectedLead: Lead | null;
-	// onUpdateLead?: (leadId: number, updates: Partial<Pick<Lead, "email" | "status">>) => void;
 }
 
 export function LeadInformationPanel({
 	isSlideOverOpen,
 	handleCloseSlideOver,
 	selectedLead,
-	// onUpdateLead,
 }: Props) {
+	const { updateLead, data } = useLeads();
 	const [isEditing, setIsEditing] = useState(false);
 
 	const [formData, setFormData] = useState<EditLeadSchema>({
@@ -37,19 +37,46 @@ export function LeadInformationPanel({
 	});
 
 	const [errors, setErrors] = useState<Record<string, string>>({});
+	const [updateError, setUpdateError] = useState<string | null>(null);
+	const [successMessage, setSuccessMessage] = useState<string | null>(null);
+	const [isUpdating, setIsUpdating] = useState(false);
+
+	const currentLead = selectedLead
+		? data.find((lead) => lead.id === selectedLead.id) || selectedLead
+		: null;
+
+	useEffect(() => {
+		if (currentLead && !isEditing) {
+			setFormData({
+				email: currentLead.email,
+				status: currentLead.status,
+			});
+		}
+	}, [currentLead, isEditing]);
+
+	// Clear messages when modal closes
+	useEffect(() => {
+		if (!isSlideOverOpen) {
+			setUpdateError(null);
+			setSuccessMessage(null);
+			setErrors({});
+		}
+	}, [isSlideOverOpen]);
 
 	function handleStartEdit() {
-		if (selectedLead) {
+		if (currentLead) {
 			setFormData({
-				email: selectedLead.email,
-				status: selectedLead.status,
+				email: currentLead.email,
+				status: currentLead.status,
 			});
 			setErrors({});
+			setUpdateError(null);
+			setSuccessMessage(null);
 			setIsEditing(true);
 		}
-	};
+	}
 
-	const handleFormSubmit = (e: React.FormEvent) => {
+	const handleFormSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
 		const formErrors = validateFormComplete(formData);
@@ -59,20 +86,43 @@ export function LeadInformationPanel({
 			return;
 		}
 
-		if (selectedLead) {
+		if (!selectedLead) return;
+
+		setIsUpdating(true);
+		setUpdateError(null);
+		setSuccessMessage(null);
+
+		try {
+			// TEMPORARY: Simulate a failure for testing
+			if (Math.random() > 0.3) { // 70% chance of "failure"
+				throw new Error("Simulated network error");
+			}
+
+			updateLead(selectedLead.id, {
+				email: formData.email,
+				status: formData.status,
+			});
+
 			setIsEditing(false);
 			setErrors({});
-			alert("Changes saved successfully!");
+			setSuccessMessage("Changes saved successfully!");
+		} catch (error) {
+			setUpdateError("Failed to save changes. Please try again.");
+			console.error("Error updating lead:", error);
+		} finally {
+			setIsUpdating(false);
 		}
 	};
 
 	function handleCancelEdit() {
 		setIsEditing(false);
 		setErrors({});
-		if (selectedLead) {
+		setUpdateError(null);
+		setSuccessMessage(null);
+		if (currentLead) {
 			setFormData({
-				email: selectedLead.email,
-				status: selectedLead.status,
+				email: currentLead.email,
+				status: currentLead.status,
 			});
 		}
 	}
@@ -87,15 +137,25 @@ export function LeadInformationPanel({
 			className="bg-zinc-800 border-none"
 			open={isSlideOverOpen}
 			onClose={handleCloseSlideOver}
-			title={selectedLead ? `Lead Details - ${selectedLead.name}` : "Lead Details"}
+			title={currentLead ? `Lead Details - ${currentLead.name}` : "Lead Details"}
 			size="lg"
 		>
-			{selectedLead && (
+			{currentLead && (
 				<form onSubmit={handleFormSubmit}>
 					<SlideOverBody>
+						{updateError && (
+							<div className="mb-4 p-3 rounded-md bg-destructive/10 border border-destructive/20">
+								<p className="text-sm text-destructive font-medium">{updateError}</p>
+							</div>
+						)}
+						{successMessage && (
+							<div className="mb-4 p-3 rounded-md bg-green-500/10 border border-green-500/20">
+								<p className="text-sm text-green-600 font-medium">{successMessage}</p>
+							</div>
+						)}
 						<div className="space-y-3 md:space-y-6">
 							<InformationCard title="Contact Information" icon={<Envelope className="w-5 h-5" />}>
-								<CardItem label="Name" content={selectedLead.name} />
+								<CardItem label="Name" content={currentLead.name} />
 								<div className="space-y-1">
 									<p className="text-sm text-muted-foreground">Email</p>
 									{isEditing ? (
@@ -105,14 +165,14 @@ export function LeadInformationPanel({
 											error={errors.email}
 										/>
 									) : (
-										<p className="text-base font-medium text-input">{selectedLead.email}</p>
+										<p className="text-base font-medium text-input">{currentLead.email}</p>
 									)}
 								</div>
-								<CardItem label="Company" content={selectedLead.company} />
+								<CardItem label="Company" content={currentLead.company} />
 							</InformationCard>
 
 							<InformationCard title="Lead Status" icon={<People className="w-5 h-5" />}>
-								<CardItem label="Source" content={selectedLead.source} />
+								<CardItem label="Source" content={currentLead.source} />
 								<div className="space-y-1">
 									<p className="text-sm text-muted-foreground">Status</p>
 									{isEditing ? (
@@ -122,15 +182,15 @@ export function LeadInformationPanel({
 											error={errors.status}
 										/>
 									) : (
-										<Badge className={getStatusColor[selectedLead.status]} variant="default">
-											{selectedLead.status}
+										<Badge className={getStatusColor[currentLead.status]} variant="default">
+											{currentLead.status}
 										</Badge>
 									)}
 								</div>
 								<div className="space-y-1">
 									<p className="text-sm text-muted-foreground">Score</p>
-									<Badge className={getScoreColor(selectedLead.score)} variant="default">
-										{selectedLead.score}
+									<Badge className={getScoreColor(currentLead.score)} variant="default">
+										{currentLead.score}
 									</Badge>
 								</div>
 							</InformationCard>
@@ -146,13 +206,14 @@ export function LeadInformationPanel({
 										type="button"
 										onClick={handleCancelEdit}
 										variant="secondary"
+										disabled={isUpdating}
 									>
 										<X className="w-6 h-6" />
 										Cancel
 									</Button>
-									<Button className="flex-1" type="submit" variant="default">
+									<Button className="flex-1" type="submit" variant="default" disabled={isUpdating}>
 										<SdCard className="w-5 h-5" />
-										Save Changes
+										{isUpdating ? "Saving..." : "Save Changes"}
 									</Button>
 								</>
 							) : (
@@ -166,7 +227,7 @@ export function LeadInformationPanel({
 										<Pencil className="w-5 h-5" />
 										Edit Lead Details
 									</Button>
-									<ConvertLeadDialog lead={selectedLead} />
+									<ConvertLeadDialog lead={currentLead} />
 								</div>
 							)}
 						</div>

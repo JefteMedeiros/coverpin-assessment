@@ -21,7 +21,7 @@ export function OpportunitiesTable() {
     );
   }
 
-  if (!isLoading || opportunities.length === 0) {
+  if (!isLoading && opportunities.length === 0) {
     return (
       <div className="p-4 bg-zinc-800 space-y-4 rounded-lg">
         <p className="text-center py-8 text-muted-foreground">No opportunities found. Convert some leads to see them here.</p>

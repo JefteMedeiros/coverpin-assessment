@@ -37,7 +37,7 @@ export function LeadsTable() {
     );
   }
 
-  if (!isLoading || leads.length === 0) {
+  if (!isLoading && leads.length === 0) {
     return (
       <div className="p-4 bg-zinc-800 space-y-4 rounded-lg">
         <p className="text-center py-8 text-muted-foreground">No leads found. Your leads will appear here once they're loaded.</p>
