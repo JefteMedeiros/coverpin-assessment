@@ -76,7 +76,7 @@ export function SlideOverPanel({
                     {title && (
                       <div className="px-6 py-4 border-b border-border">
                         <div className="flex items-center justify-between">
-                          <DialogTitle className="text-lg font-semibold text-card-foreground">
+                          <DialogTitle className="text-lg font-semibold text-input">
                             {title}
                           </DialogTitle>
                           <button

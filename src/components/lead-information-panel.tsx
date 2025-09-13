@@ -16,6 +16,7 @@ export function LeadInformationPanel({
 }: Props) {
 	return (
 		<SlideOverPanel
+      className="bg-zinc-800 border-none"
 			open={isSlideOverOpen}
 			onClose={handleCloseSlideOver}
 			title={selectedLead ? `Lead Details - ${selectedLead.name}` : "Lead Details"}
