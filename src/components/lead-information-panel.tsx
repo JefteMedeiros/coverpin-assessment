@@ -93,7 +93,7 @@ export function LeadInformationPanel({
 			{selectedLead && (
 				<form onSubmit={handleFormSubmit}>
 					<SlideOverBody>
-						<div className="space-y-6">
+						<div className="space-y-3 md:space-y-6">
 							<InformationCard title="Contact Information" icon={<Envelope className="w-5 h-5" />}>
 								<CardItem label="Name" content={selectedLead.name} />
 								<div className="space-y-1">

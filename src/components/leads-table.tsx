@@ -1,6 +1,7 @@
 import { useState } from "react";
 import leadsData from "@/assets/leads.json";
 import type { Lead, LeadStatus } from "@/types/leads";
+import { nameFormatter } from "@/utils/nameFormatter";
 import { getScoreColor } from "@/utils/score-colors";
 import { getStatusColor } from "@/utils/status-colors";
 import { ArrowDownUp } from "./icons/arrow-down-up";
@@ -50,7 +51,7 @@ export function LeadsTable() {
 								className="cursor-pointer hover:bg-muted/20 transition-colors"
 								onClick={() => handleLeadClick(lead as Lead)}
 							>
-								<TableCell>{lead.name}</TableCell>
+								<TableCell title={lead.name}>{nameFormatter(lead.name)}</TableCell>
 								<TableCell className="hidden md:table-cell">{lead.company}</TableCell>
 								<TableCell className="hidden md:table-cell">{lead.email}</TableCell>
 								<TableCell className="hidden md:table-cell">
