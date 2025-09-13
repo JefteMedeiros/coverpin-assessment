@@ -13,7 +13,7 @@ import { Skeleton } from "./ui/skeleton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table";
 
 export function LeadsTable() {
-  const { data: leads, error, isLoading } = useLeads();
+  const { data: leads, error, isLoading, sortByScore, sortDescending } = useLeads();
 
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [isSlideOverOpen, setIsSlideOverOpen] = useState(false);
@@ -37,6 +37,14 @@ export function LeadsTable() {
     );
   }
 
+  if (!isLoading || leads.length === 0) {
+    return (
+      <div className="p-4 bg-zinc-800 space-y-4 rounded-lg">
+        <p className="text-center py-8 text-muted-foreground">No leads found. Your leads will appear here once they're loaded.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="p-4 bg-zinc-800 space-y-4 rounded-lg">
       <LeadFilters />
@@ -50,8 +58,8 @@ export function LeadsTable() {
               <TableHead className="hidden md:table-cell">Source</TableHead>
               <TableHead className="flex items-center gap-2">
                 Score
-                <button type="button">
-                  <ArrowDownUp className="w-4 h-4" />
+                <button type="button" onClick={sortByScore} title={`Sort ${sortDescending ? 'ascending' : 'descending'}`}>
+                  <ArrowDownUp className={`w-4 h-4 transition-transform ${sortDescending ? 'rotate-180' : ''}`} />
                 </button>
               </TableHead>
               <TableHead>Status</TableHead>
@@ -60,12 +68,6 @@ export function LeadsTable() {
           <TableBody>
             {isLoading ? (
               <Loading />
-            ) : leads.length === 0 ? (
-              <TableRow>
-                <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
-                  No leads found. Your leads will appear here once they're loaded.
-                </TableCell>
-              </TableRow>
             ) : (
               leads.map((lead) => (
                 <TableRow
