@@ -9,6 +9,7 @@ import {
 import { Fragment, type ReactNode } from 'react'
 import { cn } from '@/utils/cn'
 import { X } from '../icons/x'
+import { Separator } from './separator'
 
 interface SlideOverPanelProps {
   open: boolean
@@ -74,23 +75,24 @@ export function SlideOverPanel({
                     )}
                   >
                     {title && (
-                      <div className="px-6 py-4 border-b border-border">
-                        <div className="flex items-center justify-between">
+                      <div className="px-6">
+                        <div className="flex items-center justify-between py-4">
                           <DialogTitle className="text-lg font-semibold text-input">
                             {title}
                           </DialogTitle>
                           <button
                             type="button"
-                            className="rounded-md p-2 text-muted-foreground hover:text-card-foreground hover:bg-muted transition-colors"
+                            className="rounded-md hover:cursor-pointer p-2 text-muted-foreground hover:bg-zinc-700/50 transition-colors"
                             onClick={onClose}
                           >
                             <span className="sr-only">Close panel</span>
                             <X className='w-6 h-6' />
                           </button>
                         </div>
+                        <Separator />
                       </div>
                     )}
-
+                    
                     <div className="flex-1 px-6 py-4">
                       {children}
                     </div>
