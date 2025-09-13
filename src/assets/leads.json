@@ -25,7 +25,7 @@
       "email": "m.chen@globalsolutions.net",
       "source": "Cold Call",
       "score": 67,
-      "status": "Converted"
+      "status": "New"
     },
     {
       "id": 4,
@@ -43,7 +43,7 @@
       "email": "david.wilson@enterprise.com",
       "source": "Website",
       "score": 74,
-      "status": "Converted"
+      "status": "New"
     },
     {
       "id": 6,

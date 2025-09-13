@@ -5,6 +5,7 @@ import { nameFormatter } from "@/utils/nameFormatter";
 import { getScoreColor } from "@/utils/score-colors";
 import { getStatusColor } from "@/utils/status-colors";
 import { ArrowDownUp } from "./icons/arrow-down-up";
+import { LeadFilters } from "./lead-filters";
 import { LeadInformationPanel } from "./lead-information-panel";
 import { Badge } from "./ui/badge";
 import { ErrorCard } from "./ui/error-card";
@@ -20,12 +21,12 @@ export function LeadsTable() {
   function handleLeadClick(lead: Lead) {
     setSelectedLead(lead);
     setIsSlideOverOpen(true);
-  };
+  }
 
   function handleCloseSlideOver() {
     setIsSlideOverOpen(false);
     setSelectedLead(null);
-  };
+  }
 
   if (error) {
     return (
@@ -37,7 +38,8 @@ export function LeadsTable() {
   }
 
   return (
-    <>
+    <div className="p-4 bg-zinc-800 space-y-4 rounded-lg">
+      <LeadFilters />
       <div className="rounded-md border border-zinc-500 bg-zinc-800 overflow-auto max-h-[500px] md:max-h-none">
         <Table>
           <TableHeader>
@@ -58,8 +60,14 @@ export function LeadsTable() {
           <TableBody>
             {isLoading ? (
               <Loading />
+            ) : leads.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+                  No leads found. Your leads will appear here once they're loaded.
+                </TableCell>
+              </TableRow>
             ) : (
-              leads?.map((lead) => (
+              leads.map((lead) => (
                 <TableRow
                   role="button"
                   key={lead.id}
@@ -97,7 +105,7 @@ export function LeadsTable() {
         handleCloseSlideOver={handleCloseSlideOver}
         selectedLead={selectedLead}
       />
-    </>
+    </div>
   );
 }
 
