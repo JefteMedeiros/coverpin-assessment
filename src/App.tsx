@@ -6,9 +6,9 @@ function App() {
   return (
     <>
       <p>Hello Coverpin</p>
-      <button onClick={() => setCount(count + 1)}>Click me</button>
+      <button type="button" onClick={() => setCount(count + 1)}>Click me</button>
       <p>Count: {count}</p>
-    </> 
+    </>
   )
 }
 

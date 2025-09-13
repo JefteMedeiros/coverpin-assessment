@@ -1,0 +1,904 @@
+{
+  "leads": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "company": "Acme Corp",
+      "email": "john.doe@example.com",
+      "source": "Website",
+      "score": 85,
+      "status": "New"
+    },
+    {
+      "id": 2,
+      "name": "Sarah Johnson",
+      "company": "TechFlow Inc",
+      "email": "sarah.johnson@techflow.com",
+      "source": "LinkedIn",
+      "score": 92,
+      "status": "Qualified"
+    },
+    {
+      "id": 3,
+      "name": "Michael Chen",
+      "company": "Global Solutions",
+      "email": "m.chen@globalsolutions.net",
+      "source": "Cold Call",
+      "score": 67,
+      "status": "New"
+    },
+    {
+      "id": 4,
+      "name": "Emily Rodriguez",
+      "company": "StartupX",
+      "email": "emily.r@startupx.io",
+      "source": "Referral",
+      "score": 88,
+      "status": "Contacted"
+    },
+    {
+      "id": 5,
+      "name": "David Wilson",
+      "company": "Enterprise Corp",
+      "email": "david.wilson@enterprise.com",
+      "source": "Website",
+      "score": 74,
+      "status": "New"
+    },
+    {
+      "id": 6,
+      "name": "Lisa Thompson",
+      "company": "InnovateLabs",
+      "email": "lisa.t@innovatelabs.com",
+      "source": "Trade Show",
+      "score": 91,
+      "status": "Qualified"
+    },
+    {
+      "id": 7,
+      "name": "Robert Kim",
+      "company": "DataDriven LLC",
+      "email": "robert.kim@datadriven.com",
+      "source": "Email Campaign",
+      "score": 56,
+      "status": "New"
+    },
+    {
+      "id": 8,
+      "name": "Amanda Foster",
+      "company": "CloudFirst",
+      "email": "amanda.foster@cloudfirst.net",
+      "source": "LinkedIn",
+      "score": 83,
+      "status": "Contacted"
+    },
+    {
+      "id": 9,
+      "name": "James Martinez",
+      "company": "SecureNet Systems",
+      "email": "j.martinez@securenet.com",
+      "source": "Referral",
+      "score": 79,
+      "status": "New"
+    },
+    {
+      "id": 10,
+      "name": "Jennifer Lee",
+      "company": "GrowthCo",
+      "email": "jennifer.lee@growthco.com",
+      "source": "Website",
+      "score": 95,
+      "status": "Qualified"
+    },
+    {
+      "id": 11,
+      "name": "Christopher Brown",
+      "company": "NextGen Industries",
+      "email": "c.brown@nextgen.com",
+      "source": "Cold Call",
+      "score": 62,
+      "status": "New"
+    },
+    {
+      "id": 12,
+      "name": "Ashley Davis",
+      "company": "FinTech Solutions",
+      "email": "ashley.davis@fintech.io",
+      "source": "LinkedIn",
+      "score": 87,
+      "status": "Contacted"
+    },
+    {
+      "id": 13,
+      "name": "Matthew Garcia",
+      "company": "Digital Dynamics",
+      "email": "matt.garcia@digitaldynamics.com",
+      "source": "Trade Show",
+      "score": 71,
+      "status": "New"
+    },
+    {
+      "id": 14,
+      "name": "Nicole Anderson",
+      "company": "SmartSoft",
+      "email": "nicole.anderson@smartsoft.com",
+      "source": "Referral",
+      "score": 89,
+      "status": "Qualified"
+    },
+    {
+      "id": 15,
+      "name": "Kevin Taylor",
+      "company": "TechVentures",
+      "email": "kevin.taylor@techventures.net",
+      "source": "Website",
+      "score": 76,
+      "status": "New"
+    },
+    {
+      "id": 16,
+      "name": "Rachel White",
+      "company": "InnovateTech",
+      "email": "rachel.white@innovatetech.com",
+      "source": "Email Campaign",
+      "score": 84,
+      "status": "Contacted"
+    },
+    {
+      "id": 17,
+      "name": "Daniel Moore",
+      "company": "AgileWorks",
+      "email": "daniel.moore@agileworks.com",
+      "source": "LinkedIn",
+      "score": 68,
+      "status": "New"
+    },
+    {
+      "id": 18,
+      "name": "Stephanie Clark",
+      "company": "CloudTech Inc",
+      "email": "stephanie.clark@cloudtech.com",
+      "source": "Cold Call",
+      "score": 93,
+      "status": "Qualified"
+    },
+    {
+      "id": 19,
+      "name": "Brian Lewis",
+      "company": "DataCore Systems",
+      "email": "brian.lewis@datacore.net",
+      "source": "Referral",
+      "score": 77,
+      "status": "New"
+    },
+    {
+      "id": 20,
+      "name": "Megan Hall",
+      "company": "TechPro Solutions",
+      "email": "megan.hall@techpro.com",
+      "source": "Website",
+      "score": 86,
+      "status": "Contacted"
+    },
+    {
+      "id": 21,
+      "name": "Andrew Young",
+      "company": "FutureTech",
+      "email": "andrew.young@futuretech.io",
+      "source": "Trade Show",
+      "score": 72,
+      "status": "New"
+    },
+    {
+      "id": 22,
+      "name": "Laura King",
+      "company": "ScaleTech",
+      "email": "laura.king@scaletech.com",
+      "source": "LinkedIn",
+      "score": 90,
+      "status": "Qualified"
+    },
+    {
+      "id": 23,
+      "name": "Ryan Scott",
+      "company": "DevCorp",
+      "email": "ryan.scott@devcorp.net",
+      "source": "Email Campaign",
+      "score": 65,
+      "status": "New"
+    },
+    {
+      "id": 24,
+      "name": "Samantha Green",
+      "company": "ModernSoft",
+      "email": "samantha.green@modernsoft.com",
+      "source": "Referral",
+      "score": 82,
+      "status": "Contacted"
+    },
+    {
+      "id": 25,
+      "name": "Tyler Adams",
+      "company": "TechFlow Systems",
+      "email": "tyler.adams@techflow.com",
+      "source": "Website",
+      "score": 75,
+      "status": "New"
+    },
+    {
+      "id": 26,
+      "name": "Kimberly Baker",
+      "company": "InnovateNow",
+      "email": "kimberly.baker@innovatenow.io",
+      "source": "Cold Call",
+      "score": 88,
+      "status": "Qualified"
+    },
+    {
+      "id": 27,
+      "name": "Justin Nelson",
+      "company": "DigitalEdge",
+      "email": "justin.nelson@digitaledge.com",
+      "source": "LinkedIn",
+      "score": 69,
+      "status": "New"
+    },
+    {
+      "id": 28,
+      "name": "Brittany Carter",
+      "company": "SmartTech Inc",
+      "email": "brittany.carter@smarttech.com",
+      "source": "Trade Show",
+      "score": 91,
+      "status": "Contacted"
+    },
+    {
+      "id": 29,
+      "name": "Gregory Mitchell",
+      "company": "NextWave Solutions",
+      "email": "gregory.mitchell@nextwave.net",
+      "source": "Referral",
+      "score": 78,
+      "status": "New"
+    },
+    {
+      "id": 30,
+      "name": "Vanessa Perez",
+      "company": "CloudVision",
+      "email": "vanessa.perez@cloudvision.com",
+      "source": "Website",
+      "score": 85,
+      "status": "Qualified"
+    },
+    {
+      "id": 31,
+      "name": "Nathan Roberts",
+      "company": "TechForward",
+      "email": "nathan.roberts@techforward.io",
+      "source": "Email Campaign",
+      "score": 73,
+      "status": "New"
+    },
+    {
+      "id": 32,
+      "name": "Heather Turner",
+      "company": "DataPoint Systems",
+      "email": "heather.turner@datapoint.com",
+      "source": "LinkedIn",
+      "score": 87,
+      "status": "Contacted"
+    },
+    {
+      "id": 33,
+      "name": "Aaron Phillips",
+      "company": "AgileFlow",
+      "email": "aaron.phillips@agileflow.net",
+      "source": "Cold Call",
+      "score": 64,
+      "status": "New"
+    },
+    {
+      "id": 34,
+      "name": "Crystal Campbell",
+      "company": "InnovateSoft",
+      "email": "crystal.campbell@innovatesoft.com",
+      "source": "Referral",
+      "score": 89,
+      "status": "Qualified"
+    },
+    {
+      "id": 35,
+      "name": "Sean Parker",
+      "company": "TechBridge",
+      "email": "sean.parker@techbridge.com",
+      "source": "Website",
+      "score": 76,
+      "status": "New"
+    },
+    {
+      "id": 36,
+      "name": "Tiffany Evans",
+      "company": "DigitalCore",
+      "email": "tiffany.evans@digitalcore.io",
+      "source": "Trade Show",
+      "score": 92,
+      "status": "Contacted"
+    },
+    {
+      "id": 37,
+      "name": "Marcus Edwards",
+      "company": "CloudStream",
+      "email": "marcus.edwards@cloudstream.net",
+      "source": "LinkedIn",
+      "score": 70,
+      "status": "New"
+    },
+    {
+      "id": 38,
+      "name": "Alicia Collins",
+      "company": "SmartFlow Systems",
+      "email": "alicia.collins@smartflow.com",
+      "source": "Email Campaign",
+      "score": 84,
+      "status": "Qualified"
+    },
+    {
+      "id": 39,
+      "name": "Jeremy Stewart",
+      "company": "TechPulse",
+      "email": "jeremy.stewart@techpulse.com",
+      "source": "Referral",
+      "score": 77,
+      "status": "New"
+    },
+    {
+      "id": 40,
+      "name": "Monica Sanchez",
+      "company": "InnovateFlow",
+      "email": "monica.sanchez@innovateflow.io",
+      "source": "Website",
+      "score": 86,
+      "status": "Contacted"
+    },
+    {
+      "id": 41,
+      "name": "Carl Morris",
+      "company": "DataTech Solutions",
+      "email": "carl.morris@datatech.com",
+      "source": "Cold Call",
+      "score": 68,
+      "status": "New"
+    },
+    {
+      "id": 42,
+      "name": "Danielle Rogers",
+      "company": "NextGen Tech",
+      "email": "danielle.rogers@nextgentech.net",
+      "source": "LinkedIn",
+      "score": 90,
+      "status": "Qualified"
+    },
+    {
+      "id": 43,
+      "name": "Victor Reed",
+      "company": "AgileCore",
+      "email": "victor.reed@agilecore.com",
+      "source": "Trade Show",
+      "score": 74,
+      "status": "New"
+    },
+    {
+      "id": 44,
+      "name": "Jacqueline Cook",
+      "company": "TechStream Inc",
+      "email": "jacqueline.cook@techstream.com",
+      "source": "Referral",
+      "score": 88,
+      "status": "Contacted"
+    },
+    {
+      "id": 45,
+      "name": "Brandon Bailey",
+      "company": "CloudWorks",
+      "email": "brandon.bailey@cloudworks.io",
+      "source": "Website",
+      "score": 72,
+      "status": "New"
+    },
+    {
+      "id": 46,
+      "name": "Courtney Rivera",
+      "company": "DigitalFlow",
+      "email": "courtney.rivera@digitalflow.net",
+      "source": "Email Campaign",
+      "score": 85,
+      "status": "Qualified"
+    },
+    {
+      "id": 47,
+      "name": "Harold Cooper",
+      "company": "SmartCore Systems",
+      "email": "harold.cooper@smartcore.com",
+      "source": "LinkedIn",
+      "score": 66,
+      "status": "New"
+    },
+    {
+      "id": 48,
+      "name": "Kathryn Richardson",
+      "company": "TechVision",
+      "email": "kathryn.richardson@techvision.com",
+      "source": "Cold Call",
+      "score": 91,
+      "status": "Contacted"
+    },
+    {
+      "id": 49,
+      "name": "Albert Cox",
+      "company": "InnovateCore",
+      "email": "albert.cox@innovatecore.io",
+      "source": "Referral",
+      "score": 79,
+      "status": "New"
+    },
+    {
+      "id": 50,
+      "name": "Melissa Ward",
+      "company": "DataFlow Inc",
+      "email": "melissa.ward@dataflow.com",
+      "source": "Website",
+      "score": 83,
+      "status": "Qualified"
+    },
+    {
+      "id": 51,
+      "name": "Keith Torres",
+      "company": "CloudTech Solutions",
+      "email": "keith.torres@cloudtech.net",
+      "source": "Trade Show",
+      "score": 71,
+      "status": "New"
+    },
+    {
+      "id": 52,
+      "name": "Amy Peterson",
+      "company": "AgileStream",
+      "email": "amy.peterson@agilestream.com",
+      "source": "LinkedIn",
+      "score": 87,
+      "status": "Contacted"
+    },
+    {
+      "id": 53,
+      "name": "Wayne Gray",
+      "company": "TechCore Inc",
+      "email": "wayne.gray@techcore.com",
+      "source": "Email Campaign",
+      "score": 75,
+      "status": "New"
+    },
+    {
+      "id": 54,
+      "name": "Shannon Ramirez",
+      "company": "DigitalWorks",
+      "email": "shannon.ramirez@digitalworks.io",
+      "source": "Referral",
+      "score": 89,
+      "status": "Qualified"
+    },
+    {
+      "id": 55,
+      "name": "Douglas James",
+      "company": "SmartStream",
+      "email": "douglas.james@smartstream.net",
+      "source": "Website",
+      "score": 67,
+      "status": "New"
+    },
+    {
+      "id": 56,
+      "name": "Christine Watson",
+      "company": "InnovateTech Inc",
+      "email": "christine.watson@innovatetech.com",
+      "source": "Cold Call",
+      "score": 92,
+      "status": "Contacted"
+    },
+    {
+      "id": 57,
+      "name": "Eugene Brooks",
+      "company": "CloudCore Systems",
+      "email": "eugene.brooks@cloudcore.com",
+      "source": "LinkedIn",
+      "score": 73,
+      "status": "New"
+    },
+    {
+      "id": 58,
+      "name": "Deborah Kelly",
+      "company": "TechFlow Inc",
+      "email": "deborah.kelly@techflow.io",
+      "source": "Trade Show",
+      "score": 86,
+      "status": "Qualified"
+    },
+    {
+      "id": 59,
+      "name": "Ralph Sanders",
+      "company": "DataStream Solutions",
+      "email": "ralph.sanders@datastream.net",
+      "source": "Referral",
+      "score": 78,
+      "status": "New"
+    },
+    {
+      "id": 60,
+      "name": "Frances Price",
+      "company": "AgileWorks Inc",
+      "email": "frances.price@agileworks.com",
+      "source": "Website",
+      "score": 84,
+      "status": "Contacted"
+    },
+    {
+      "id": 61,
+      "name": "Roy Bennett",
+      "company": "DigitalCore Inc",
+      "email": "roy.bennett@digitalcore.com",
+      "source": "Email Campaign",
+      "score": 69,
+      "status": "New"
+    },
+    {
+      "id": 62,
+      "name": "Janet Wood",
+      "company": "SmartTech Solutions",
+      "email": "janet.wood@smarttech.io",
+      "source": "LinkedIn",
+      "score": 88,
+      "status": "Qualified"
+    },
+    {
+      "id": 63,
+      "name": "Louis Barnes",
+      "company": "TechStream Solutions",
+      "email": "louis.barnes@techstream.net",
+      "source": "Cold Call",
+      "score": 76,
+      "status": "New"
+    },
+    {
+      "id": 64,
+      "name": "Marie Ross",
+      "company": "CloudFlow Systems",
+      "email": "marie.ross@cloudflow.com",
+      "source": "Referral",
+      "score": 90,
+      "status": "Contacted"
+    },
+    {
+      "id": 65,
+      "name": "Philip Henderson",
+      "company": "InnovateStream",
+      "email": "philip.henderson@innovatestream.io",
+      "source": "Website",
+      "score": 72,
+      "status": "New"
+    },
+    {
+      "id": 66,
+      "name": "Gloria Coleman",
+      "company": "DataCore Inc",
+      "email": "gloria.coleman@datacore.com",
+      "source": "Trade Show",
+      "score": 85,
+      "status": "Qualified"
+    },
+    {
+      "id": 67,
+      "name": "Johnny Jenkins",
+      "company": "TechCore Solutions",
+      "email": "johnny.jenkins@techcore.net",
+      "source": "LinkedIn",
+      "score": 74,
+      "status": "New"
+    },
+    {
+      "id": 68,
+      "name": "Diana Perry",
+      "company": "AgileFlow Inc",
+      "email": "diana.perry@agileflow.com",
+      "source": "Email Campaign",
+      "score": 87,
+      "status": "Contacted"
+    },
+    {
+      "id": 69,
+      "name": "Arthur Powell",
+      "company": "CloudStream Inc",
+      "email": "arthur.powell@cloudstream.io",
+      "source": "Referral",
+      "score": 71,
+      "status": "New"
+    },
+    {
+      "id": 70,
+      "name": "Julie Long",
+      "company": "DigitalTech Systems",
+      "email": "julie.long@digitaltech.com",
+      "source": "Website",
+      "score": 89,
+      "status": "Qualified"
+    },
+    {
+      "id": 71,
+      "name": "Lawrence Hughes",
+      "company": "SmartCore Inc",
+      "email": "lawrence.hughes@smartcore.net",
+      "source": "Cold Call",
+      "score": 68,
+      "status": "New"
+    },
+    {
+      "id": 72,
+      "name": "Katrina Flores",
+      "company": "TechWorks Solutions",
+      "email": "katrina.flores@techworks.com",
+      "source": "LinkedIn",
+      "score": 91,
+      "status": "Contacted"
+    },
+    {
+      "id": 73,
+      "name": "Samuel Washington",
+      "company": "InnovateCore Inc",
+      "email": "samuel.washington@innovatecore.io",
+      "source": "Trade Show",
+      "score": 77,
+      "status": "New"
+    },
+    {
+      "id": 74,
+      "name": "Cheryl Butler",
+      "company": "DataTech Inc",
+      "email": "cheryl.butler@datatech.net",
+      "source": "Referral",
+      "score": 83,
+      "status": "Qualified"
+    },
+    {
+      "id": 75,
+      "name": "Frank Simmons",
+      "company": "CloudCore Inc",
+      "email": "frank.simmons@cloudcore.io",
+      "source": "Website",
+      "score": 75,
+      "status": "New"
+    },
+    {
+      "id": 76,
+      "name": "Beverly Foster",
+      "company": "AgileCore Inc",
+      "email": "beverly.foster@agilecore.com",
+      "source": "Email Campaign",
+      "score": 86,
+      "status": "Contacted"
+    },
+    {
+      "id": 77,
+      "name": "Jose Griffin",
+      "company": "TechFlow Systems",
+      "email": "jose.griffin@techflow.net",
+      "source": "LinkedIn",
+      "score": 70,
+      "status": "New"
+    },
+    {
+      "id": 78,
+      "name": "Marilyn Diaz",
+      "company": "DigitalStream Inc",
+      "email": "marilyn.diaz@digitalstream.com",
+      "source": "Cold Call",
+      "score": 88,
+      "status": "Qualified"
+    },
+    {
+      "id": 79,
+      "name": "Peter Hayes",
+      "company": "SmartFlow Inc",
+      "email": "peter.hayes@smartflow.io",
+      "source": "Referral",
+      "score": 79,
+      "status": "New"
+    },
+    {
+      "id": 80,
+      "name": "Carolyn Myers",
+      "company": "InnovateTech Systems",
+      "email": "carolyn.myers@innovatetech.net",
+      "source": "Website",
+      "score": 82,
+      "status": "Contacted"
+    },
+    {
+      "id": 81,
+      "name": "Henry Ford",
+      "company": "CloudTech Systems",
+      "email": "henry.ford@cloudtech.com",
+      "source": "Trade Show",
+      "score": 73,
+      "status": "New"
+    },
+    {
+      "id": 82,
+      "name": "Ruth Wells",
+      "company": "DataFlow Systems",
+      "email": "ruth.wells@dataflow.io",
+      "source": "LinkedIn",
+      "score": 90,
+      "status": "Qualified"
+    },
+    {
+      "id": 83,
+      "name": "George Fisher",
+      "company": "TechCore Systems",
+      "email": "george.fisher@techcore.com",
+      "source": "Email Campaign",
+      "score": 66,
+      "status": "New"
+    },
+    {
+      "id": 84,
+      "name": "Sharon Stone",
+      "company": "AgileStream Inc",
+      "email": "sharon.stone@agilestream.net",
+      "source": "Referral",
+      "score": 87,
+      "status": "Contacted"
+    },
+    {
+      "id": 85,
+      "name": "Willie Gardner",
+      "company": "DigitalCore Systems",
+      "email": "willie.gardner@digitalcore.io",
+      "source": "Website",
+      "score": 74,
+      "status": "New"
+    },
+    {
+      "id": 86,
+      "name": "Donna Payne",
+      "company": "SmartTech Systems",
+      "email": "donna.payne@smarttech.com",
+      "source": "Cold Call",
+      "score": 89,
+      "status": "Qualified"
+    },
+    {
+      "id": 87,
+      "name": "Raymond Kelley",
+      "company": "CloudFlow Inc",
+      "email": "raymond.kelley@cloudflow.net",
+      "source": "LinkedIn",
+      "score": 71,
+      "status": "New"
+    },
+    {
+      "id": 88,
+      "name": "Alice Dunn",
+      "company": "TechStream Systems",
+      "email": "alice.dunn@techstream.io",
+      "source": "Trade Show",
+      "score": 85,
+      "status": "Contacted"
+    },
+    {
+      "id": 89,
+      "name": "Gerald Pierce",
+      "company": "InnovateFlow Inc",
+      "email": "gerald.pierce@innovateflow.com",
+      "source": "Referral",
+      "score": 78,
+      "status": "New"
+    },
+    {
+      "id": 90,
+      "name": "Joyce Silva",
+      "company": "DataCore Systems",
+      "email": "joyce.silva@datacore.net",
+      "source": "Website",
+      "score": 92,
+      "status": "Qualified"
+    },
+    {
+      "id": 91,
+      "name": "Harold Knight",
+      "company": "AgileWorks Systems",
+      "email": "harold.knight@agileworks.io",
+      "source": "Email Campaign",
+      "score": 69,
+      "status": "New"
+    },
+    {
+      "id": 92,
+      "name": "Virginia Hunt",
+      "company": "CloudCore Systems",
+      "email": "virginia.hunt@cloudcore.com",
+      "source": "LinkedIn",
+      "score": 86,
+      "status": "Contacted"
+    },
+    {
+      "id": 93,
+      "name": "Jack Alexander",
+      "company": "TechFlow Inc",
+      "email": "jack.alexander@techflow.com",
+      "source": "Cold Call",
+      "score": 75,
+      "status": "New"
+    },
+    {
+      "id": 94,
+      "name": "Pamela Graham",
+      "company": "DigitalWorks Inc",
+      "email": "pamela.graham@digitalworks.net",
+      "source": "Referral",
+      "score": 88,
+      "status": "Qualified"
+    },
+    {
+      "id": 95,
+      "name": "Roger Sullivan",
+      "company": "SmartStream Systems",
+      "email": "roger.sullivan@smartstream.com",
+      "source": "Website",
+      "score": 72,
+      "status": "New"
+    },
+    {
+      "id": 96,
+      "name": "Janice Wallace",
+      "company": "InnovateTech Solutions",
+      "email": "janice.wallace@innovatetech.io",
+      "source": "Trade Show",
+      "score": 91,
+      "status": "Contacted"
+    },
+    {
+      "id": 97,
+      "name": "Terry Freeman",
+      "company": "CloudStream Systems",
+      "email": "terry.freeman@cloudstream.com",
+      "source": "LinkedIn",
+      "score": 67,
+      "status": "New"
+    },
+    {
+      "id": 98,
+      "name": "Martha Reid",
+      "company": "DataTech Systems",
+      "email": "martha.reid@datatech.io",
+      "source": "Email Campaign",
+      "score": 84,
+      "status": "Qualified"
+    },
+    {
+      "id": 99,
+      "name": "Steve Palmer",
+      "company": "TechCore Inc",
+      "email": "steve.palmer@techcore.net",
+      "source": "Referral",
+      "score": 76,
+      "status": "New"
+    },
+    {
+      "id": 100,
+      "name": "Catherine Webb",
+      "company": "AgileFlow Systems",
+      "email": "catherine.webb@agileflow.io",
+      "source": "Website",
+      "score": 93,
+      "status": "Contacted"
+    }
+  ]
+}
