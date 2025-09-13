@@ -1,6 +1,7 @@
 import { useState } from "react";
 import leadsData from "./assets/leads.json";
 import { ArrowDownUp } from "./components/icons/arrow-down-up";
+import { Badge } from "./components/ui/badge";
 import { Input } from "./components/ui/input";
 import { Option, Select, SelectContent, SelectTrigger } from "./components/ui/select";
 import {
@@ -11,6 +12,7 @@ import {
 	TableHeader,
 	TableRow,
 } from "./components/ui/table";
+import type { LeadStatus } from "./types/leads";
 import { cn } from "./utils/cn";
 
 const people = [
@@ -26,6 +28,13 @@ function App() {
 
 	const _handleSelect = (value: unknown) => {
 		setSelected(value as { id: number; name: string });
+	};
+
+	const _statusColors: Record<LeadStatus, string> = {
+		New: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300",
+		Contacted: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300",
+		Qualified: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300",
+		Converted: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300",
 	};
 
 	const [selectedStatus, setSelectedStatus] = useState("all");
@@ -44,7 +53,7 @@ function App() {
 							type="button"
 							onClick={() => setSelectedStatus("all")}
 						>
-							All Leads
+							Leads
 						</button>
 						<button
 							className={cn(
@@ -54,7 +63,7 @@ function App() {
 							type="button"
 							onClick={() => setSelectedStatus("qualified")}
 						>
-							Qualified
+							Opportunities
 						</button>
 					</div>
 				</div>
@@ -95,9 +104,18 @@ function App() {
 										<TableCell>{lead.name}</TableCell>
 										<TableCell>{lead.company}</TableCell>
 										<TableCell>{lead.email}</TableCell>
-										<TableCell>{lead.source}</TableCell>
+										<TableCell>
+											<Badge variant="outline">{lead.source}</Badge>
+										</TableCell>
 										<TableCell>{lead.score}</TableCell>
-										<TableCell>{lead.status}</TableCell>
+										<TableCell>
+											<Badge 
+                        className={_statusColors[lead.status as LeadStatus]} 
+                        variant="default"
+                      >
+                        {lead.status}
+                      </Badge>
+										</TableCell>
 									</TableRow>
 								))}
 							</TableBody>

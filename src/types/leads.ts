@@ -1,7 +1,8 @@
 export enum LeadStatus {
   NEW = "New",
   QUALIFIED = "Qualified",
-  CONTACTED = "Contacted"
+  CONTACTED = "Contacted",
+  CONVERTED = "Converted"
 }
 
 export enum LeadSource {
