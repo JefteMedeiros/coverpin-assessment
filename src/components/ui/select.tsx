@@ -70,7 +70,7 @@ export function Option({ className, children, ...props }: OptionProps) {
   return (
     <ListboxOption
       className={cn(
-        "group text-input flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 select-none text-sm outline-none data-focus:bg-accent data-focus:text-accent-foreground",
+        "group text-input flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 select-none text-sm outline-none data-focus:bg-primary data-focus:text-accent-foreground",
         className
       )}
       {...props}
