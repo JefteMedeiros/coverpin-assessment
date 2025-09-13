@@ -4,6 +4,7 @@ import { LeadStatus } from "@/types/leads";
 import type { EditLeadSchema } from "@/utils/schemas/lead";
 import { getScoreColor } from "@/utils/score-colors";
 import { getStatusColor } from "@/utils/status-colors";
+import { ConvertLeadDialog } from "./convert-lead-dialog";
 import { Envelope } from "./icons/envelope";
 import { Pencil } from "./icons/pencil";
 import { SdCard } from "./icons/pencil copy";
@@ -59,7 +60,6 @@ export function LeadInformationPanel({
 		}
 
 		if (selectedLead) {
-			// onUpdateLead(selectedLead.id, { email: formData.email, status: formData.status });
 			setIsEditing(false);
 			setErrors({});
 			alert("Changes saved successfully!");
@@ -156,15 +156,18 @@ export function LeadInformationPanel({
 									</Button>
 								</>
 							) : (
-								<Button
-									className="w-full"
-									onClick={handleStartEdit}
-									variant="default"
-									type="button"
-								>
-									<Pencil className="w-5 h-5" />
-									Edit Lead Details
-								</Button>
+								<div className="flex flex-col gap-2 w-full">
+									<Button
+										className="w-full"
+										onClick={handleStartEdit}
+										variant="outline"
+										type="button"
+									>
+										<Pencil className="w-5 h-5" />
+										Edit Lead Details
+									</Button>
+									<ConvertLeadDialog lead={selectedLead} />
+								</div>
 							)}
 						</div>
 					</SlideOverFooter>
