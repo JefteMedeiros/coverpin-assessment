@@ -8,10 +8,12 @@ import { ErrorCard } from "./ui/error-card";
 import { StatsCard } from "./ui/stats-card";
 
 export function StatsCards() {
-	const { data: leads, isLoading } = useLeads();
+	const { data: leads, isLoading, error } = useLeads();
 
 	const stats = useMemo(() => {
-		const statusCounts = leads.reduce(
+		if (!leads || error) return { total: "0", qualified: "0", converted: "0" };
+
+    const statusCounts = leads.reduce(
 			(acc, lead) => {
 				acc[lead.status] = (acc[lead.status] || 0) + 1;
 				return acc;
@@ -24,7 +26,7 @@ export function StatsCards() {
 			qualified: (statusCounts[LeadStatus.QUALIFIED] || 0).toString(),
 			converted: (statusCounts[LeadStatus.CONVERTED] || 0).toString(),
 		};
-	}, [leads]);
+	}, [leads, error]);
 
 	const cardConfigs = [
 		{
@@ -46,8 +48,6 @@ export function StatsCards() {
 			icon: <GraphUpArrow className="w-5 h-5" />,
 		},
 	];
-
-	const error = "Error loading leads";
 
 	if (error) {
 		return (

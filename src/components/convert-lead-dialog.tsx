@@ -94,7 +94,7 @@ export function ConvertLeadDialog({ lead, onConvert }: ConvertLeadDialogProps) {
 		}
 	};
 
-	const handleCancel = () => {
+	function handleCancel() {
 		setOpen(false);
 		setFormData({
 			name: "",
@@ -105,7 +105,7 @@ export function ConvertLeadDialog({ lead, onConvert }: ConvertLeadDialogProps) {
 			expectedCloseDate: "",
 		});
 		setErrors({});
-	};
+	}
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>

@@ -12,7 +12,7 @@ interface LeadsContextValue {
 
 const LeadsContext = createContext<LeadsContextValue | undefined>(undefined);
 
-export const LeadsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export function LeadsProvider({ children }: { children: React.ReactNode }) {
 	const [data, setData] = useState<Lead[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
@@ -43,7 +43,7 @@ export const LeadsProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 			{children}
 		</LeadsContext.Provider>
 	);
-};
+}
 
 export const useLeads = (): LeadsContextValue => {
 	const context = useContext(LeadsContext);

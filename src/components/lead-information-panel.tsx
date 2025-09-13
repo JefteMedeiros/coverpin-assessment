@@ -38,7 +38,7 @@ export function LeadInformationPanel({
 
 	const [errors, setErrors] = useState<Record<string, string>>({});
 
-	const handleStartEdit = () => {
+	function handleStartEdit() {
 		if (selectedLead) {
 			setFormData({
 				email: selectedLead.email,
@@ -66,7 +66,7 @@ export function LeadInformationPanel({
 		}
 	};
 
-	const handleCancelEdit = () => {
+	function handleCancelEdit() {
 		setIsEditing(false);
 		setErrors({});
 		if (selectedLead) {
@@ -75,7 +75,7 @@ export function LeadInformationPanel({
 				status: selectedLead.status,
 			});
 		}
-	};
+	}
 
 	const handleFieldChange = (field: keyof EditLeadSchema, value: string | LeadStatus) => {
 		const newFormData = { ...formData, [field]: value } as EditLeadSchema;
