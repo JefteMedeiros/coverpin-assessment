@@ -1,14 +1,13 @@
-import { useState } from "react"
+import { Input } from "./components/ui/input"
 
 function App() {
-  const [count, setCount] = useState<number>(0)
-
   return (
-    <>
-      <p>Hello Coverpin</p>
-      <button type="button" onClick={() => setCount(count + 1)}>Click me</button>
-      <p>Count: {count}</p>
-    </>
+    <div className="h-screen w-screen bg-zinc-900">
+      <div className="max-w-7xl mx-auto py-10">
+        <img src="./sales-hub.png" alt="Coverpin"/>
+        <Input placeholder="Search by name or company..." className="mt-2" />
+      </div>
+    </div>
   )
 }
 
