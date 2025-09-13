@@ -23,7 +23,7 @@ export function SelectTrigger({ className, children, ...props }: SelectTriggerPr
   return (
     <ListboxButton
       className={cn(
-        "placeholder:text-muted-foreground bg-zinc-800 dark:bg-input/30 border-zinc-500 flex items-center h-10 w-full min-w-0 rounded-md border px-3 py-1 text-base text-input shadow-xs transition-[color,box-shadow] outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        "placeholder:text-muted-foreground bg-zinc-700/50 dark:bg-input/30 border-zinc-500 flex items-center h-10 w-full min-w-0 rounded-md border px-3 py-1 text-base text-input shadow-xs transition-[color,box-shadow] outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
         "focus-visible:border-primary focus-visible:ring-primary/50 focus-visible:ring-[3px]",
         "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
         "relative pr-8 text-left cursor-default",
