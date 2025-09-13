@@ -1,5 +1,5 @@
 import { useState } from "react";
-import leadsData from "@/assets/leads.json";
+import { useLeads } from "@/store/LeadsContext";
 import type { Lead, LeadStatus } from "@/types/leads";
 import { nameFormatter } from "@/utils/nameFormatter";
 import { getScoreColor } from "@/utils/score-colors";
@@ -10,7 +10,8 @@ import { Badge } from "./ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table";
 
 export function LeadsTable() {
-	const leads = leadsData.leads;
+	const { data: leads, error, isLoading } = useLeads();
+
 	const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
 	const [isSlideOverOpen, setIsSlideOverOpen] = useState(false);
 
