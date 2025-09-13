@@ -63,7 +63,7 @@ export function ConvertLeadDialog({ lead, onConvert }: ConvertLeadDialogProps) {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		e.stopPropagation(); // Prevent event bubbling to parent form
+		e.stopPropagation(); 
 
 		const validationErrors = validateConvertForm(formData);
     

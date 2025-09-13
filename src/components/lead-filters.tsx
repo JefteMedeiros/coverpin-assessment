@@ -4,27 +4,31 @@ import { Input } from "./ui/input";
 import { Option, Select, SelectContent, SelectTrigger } from "./ui/select";
 
 export function LeadFilters() {
-	const values = Object.values(LeadStatus);
+  const values = Object.values(LeadStatus);
+  const ALL_STATUS = "All Status";
+  
+  const [selected, setSelected] = useState(ALL_STATUS);
 
-	const [selected, setSelected] = useState(values[0]);
+  const _handleSelect = (value: unknown) => {
+    setSelected(value as LeadStatus | typeof ALL_STATUS);
+  };
 
-	const _handleSelect = (value: unknown) => {
-		setSelected(value as LeadStatus);
-	};
-
-	return (
-		<div className="flex items-center w-full gap-2">
-			<Input className="max-w-3/4" placeholder="Search by name or company..." />
-			<Select value={selected} onChange={_handleSelect}>
-				<SelectTrigger className="max-w-1/4">{selected}</SelectTrigger>
-				<SelectContent>
-					{values.map((value) => (
-						<Option key={value} value={value}>
-							{value}
-						</Option>
-					))}
-				</SelectContent>
-			</Select>
-		</div>
-	);
+  return (
+    <div className="flex flex-col md:flex-row items-center w-full gap-2">
+      <Input className="w-full md:max-w-3/4" placeholder="Search by name or company..." />
+      <Select value={selected} onChange={_handleSelect}>
+        <SelectTrigger className="w-full md:max-w-1/4">{selected}</SelectTrigger>
+        <SelectContent>
+          <Option key={ALL_STATUS} value={ALL_STATUS}>
+            {ALL_STATUS}
+          </Option>
+          {values.map((value) => (
+            <Option key={value} value={value}>
+              {value}
+            </Option>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+  );
 }

@@ -25,14 +25,14 @@ export function LeadsTable() {
 
 	return (
 		<>
-			<div className="rounded-md border border-zinc-500 bg-zinc-800">
+			<div className="rounded-md border border-zinc-500 bg-zinc-800 overflow-auto max-h-[500px] md:max-h-none">
 				<Table>
 					<TableHeader>
 						<TableRow>
 							<TableHead>Name</TableHead>
-							<TableHead>Company</TableHead>
-							<TableHead>Email</TableHead>
-							<TableHead>Source</TableHead>
+							<TableHead className="hidden md:table-cell">Company</TableHead>
+							<TableHead className="hidden md:table-cell">Email</TableHead>
+							<TableHead className="hidden md:table-cell">Source</TableHead>
 							<TableHead className="flex items-center gap-2">
 								Score
 								<button type="button">
@@ -51,9 +51,9 @@ export function LeadsTable() {
 								onClick={() => handleLeadClick(lead as Lead)}
 							>
 								<TableCell>{lead.name}</TableCell>
-								<TableCell>{lead.company}</TableCell>
-								<TableCell>{lead.email}</TableCell>
-								<TableCell>
+								<TableCell className="hidden md:table-cell">{lead.company}</TableCell>
+								<TableCell className="hidden md:table-cell">{lead.email}</TableCell>
+								<TableCell className="hidden md:table-cell">
 									<Badge variant="outline">{lead.source}</Badge>
 								</TableCell>
 								<TableCell>
