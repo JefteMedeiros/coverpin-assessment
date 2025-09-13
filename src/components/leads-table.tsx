@@ -45,8 +45,9 @@ export function LeadsTable() {
 					<TableBody>
 						{leads.map((lead) => (
 							<TableRow
+								role="button"
 								key={lead.id}
-								className="cursor-pointer hover:bg-muted/50 transition-colors"
+								className="cursor-pointer hover:bg-muted/20 transition-colors"
 								onClick={() => handleLeadClick(lead as Lead)}
 							>
 								<TableCell>{lead.name}</TableCell>
