@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useLeads } from "@/store/LeadsContext";
+import { useData } from "@/store/DataContext";
 import { LeadStatus } from "@/types/leads";
 import { Bullseye } from "./icons/bullseye";
 import { GraphUpArrow } from "./icons/graph-up-arrow";
@@ -8,7 +8,7 @@ import { ErrorCard } from "./ui/error-card";
 import { StatsCard } from "./ui/stats-card";
 
 export function StatsCards() {
-	const { data: leads, isLoading, error } = useLeads();
+	const { data: leads, isLoading, error } = useData();
 
 	const stats = useMemo(() => {
 		if (!leads || error) return { total: "0", qualified: "0", converted: "0" };

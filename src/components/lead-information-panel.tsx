@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
-import { useLeads } from "@/store/LeadsContext";
+import { useEffect, useId, useState } from "react";
+import { useData } from "@/store/DataContext";
 import type { Lead } from "@/types/leads";
 import { LeadStatus } from "@/types/leads";
-import type { EditLeadSchema } from "@/utils/schemas/lead";
+import { type EditLeadSchema, editLeadSchema } from "@/utils/schemas/lead";
 import { getScoreColor } from "@/utils/score-colors";
 import { getStatusColor } from "@/utils/status-colors";
+import { _validateFormComplete } from "@/utils/validate-form";
 import { ConvertLeadDialog } from "./convert-lead-dialog";
 import { Envelope } from "./icons/envelope";
 import { Pencil } from "./icons/pencil";
@@ -14,7 +15,7 @@ import { X } from "./icons/x";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { CardItem, InformationCard } from "./ui/information-card";
-import { InlineEditEmail, InlineEditSelect, validateFormComplete } from "./ui/inline-edit";
+import { InlineEditEmail, InlineEditSelect } from "./ui/inline-edit";
 import { SlideOverBody, SlideOverFooter, SlideOverPanel } from "./ui/slide-over-panel";
 
 interface Props {
@@ -28,40 +29,25 @@ export function LeadInformationPanel({
 	handleCloseSlideOver,
 	selectedLead,
 }: Props) {
-	const { updateLead, data } = useLeads();
-	const [isEditing, setIsEditing] = useState(false);
+	const { updateLead, data } = useData();
 
-	const [formData, setFormData] = useState<EditLeadSchema>({
+	const emailId = useId();
+	const statusId = useId();
+
+  const [formData, setFormData] = useState<EditLeadSchema>({
 		email: selectedLead?.email || "",
 		status: selectedLead?.status || LeadStatus.NEW,
 	});
 
+	const [isEditing, setIsEditing] = useState(false);
+	const [isUpdating, setIsUpdating] = useState(false);
 	const [errors, setErrors] = useState<Record<string, string>>({});
 	const [updateError, setUpdateError] = useState<string | null>(null);
 	const [successMessage, setSuccessMessage] = useState<string | null>(null);
-	const [isUpdating, setIsUpdating] = useState(false);
 
 	const currentLead = selectedLead
 		? data.find((lead) => lead.id === selectedLead.id) || selectedLead
 		: null;
-
-	useEffect(() => {
-		if (currentLead && !isEditing) {
-			setFormData({
-				email: currentLead.email,
-				status: currentLead.status,
-			});
-		}
-	}, [currentLead, isEditing]);
-
-	// Clear messages when modal closes
-	useEffect(() => {
-		if (!isSlideOverOpen) {
-			setUpdateError(null);
-			setSuccessMessage(null);
-			setErrors({});
-		}
-	}, [isSlideOverOpen]);
 
 	function handleStartEdit() {
 		if (currentLead) {
@@ -76,10 +62,23 @@ export function LeadInformationPanel({
 		}
 	}
 
-	const handleFormSubmit = async (e: React.FormEvent) => {
+	function handleCancelEdit() {
+		setIsEditing(false);
+		setErrors({});
+		setUpdateError(null);
+		setSuccessMessage(null);
+		if (currentLead) {
+			setFormData({
+				email: currentLead.email,
+				status: currentLead.status,
+			});
+		}
+	}
+
+	async function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
 
-		const formErrors = validateFormComplete(formData);
+		const formErrors = _validateFormComplete<EditLeadSchema>(editLeadSchema, formData);
 
 		if (Object.keys(formErrors).length > 0) {
 			setErrors(formErrors);
@@ -93,12 +92,8 @@ export function LeadInformationPanel({
 		setSuccessMessage(null);
 
 		try {
-			// TEMPORARY: Simulate a failure for testing
-			if (Math.random() > 0.3) {
-				// 70% chance of "failure"
-				throw new Error("Simulated network error");
-			}
-
+			await new Promise(resolve => setTimeout(resolve, 300));
+			
 			updateLead(selectedLead.id, {
 				email: formData.email,
 				status: formData.status,
@@ -113,25 +108,29 @@ export function LeadInformationPanel({
 		} finally {
 			setIsUpdating(false);
 		}
-	};
+	}
 
-	function handleCancelEdit() {
-		setIsEditing(false);
-		setErrors({});
-		setUpdateError(null);
-		setSuccessMessage(null);
-		if (currentLead) {
+	function handleFieldChange(field: keyof EditLeadSchema, value: string | LeadStatus) {
+		const newFormData = { ...formData, [field]: value } as EditLeadSchema;
+		setFormData(newFormData);
+	}
+
+	useEffect(() => {
+		if (currentLead && !isEditing) {
 			setFormData({
 				email: currentLead.email,
 				status: currentLead.status,
 			});
 		}
-	}
+	}, [currentLead, isEditing]);
 
-	const handleFieldChange = (field: keyof EditLeadSchema, value: string | LeadStatus) => {
-		const newFormData = { ...formData, [field]: value } as EditLeadSchema;
-		setFormData(newFormData);
-	};
+	useEffect(() => {
+		if (!isSlideOverOpen) {
+			setUpdateError(null);
+			setSuccessMessage(null);
+			setErrors({});
+		}
+	}, [isSlideOverOpen]);
 
 	return (
 		<SlideOverPanel
@@ -142,7 +141,7 @@ export function LeadInformationPanel({
 			size="lg"
 		>
 			{currentLead && (
-				<form onSubmit={handleFormSubmit}>
+				<form className="space-y-3" onSubmit={handleSubmit}>
 					<SlideOverBody>
 						{updateError && (
 							<div className="mb-4 p-3 rounded-md bg-destructive/10 border border-destructive/20">
@@ -154,13 +153,14 @@ export function LeadInformationPanel({
 								<p className="text-sm text-green-600 font-medium">{successMessage}</p>
 							</div>
 						)}
-						<div className="space-y-3 md:space-y-6">
+						<div className="space-y-3">
 							<InformationCard title="Contact Information" icon={<Envelope className="w-5 h-5" />}>
 								<CardItem label="Name" content={currentLead.name} />
 								<div className="space-y-1">
-									<p className="text-sm text-muted-foreground">Email</p>
+									<label htmlFor={emailId} className="text-sm text-muted-foreground">Email</label>
 									{isEditing ? (
 										<InlineEditEmail
+											id={emailId}
 											value={formData.email}
 											onChange={(value) => handleFieldChange("email", value)}
 											error={errors.email}
@@ -175,9 +175,10 @@ export function LeadInformationPanel({
 							<InformationCard title="Lead Status" icon={<People className="w-5 h-5" />}>
 								<CardItem label="Source" content={currentLead.source} />
 								<div className="space-y-1">
-									<p className="text-sm text-muted-foreground">Status</p>
+									<label htmlFor={statusId} className="text-sm text-muted-foreground">Status</label>
 									{isEditing ? (
 										<InlineEditSelect
+											id={statusId}
 											value={formData.status}
 											onChange={(value) => handleFieldChange("status", value)}
 											error={errors.status}

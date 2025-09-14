@@ -1,10 +1,10 @@
-import { useLeads } from "@/store/LeadsContext";
+import { useData } from "@/store/DataContext";
 import { LeadStatus } from "@/types/leads";
 import { Input } from "./ui/input";
 import { Option, Select, SelectContent, SelectTrigger } from "./ui/select";
 
 export function LeadFilters() {
-	const { isLoading, error, searchTerm, setSearchTerm, statusFilter, setStatusFilter } = useLeads();
+	const { isLoading, error, searchTerm, setSearchTerm, statusFilter, setStatusFilter } = useData();
 
 	const values = Object.values(LeadStatus);
 	const ALL_STATUS = "All Status";

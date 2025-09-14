@@ -1,5 +1,5 @@
 import { Tab, TabList } from "@headlessui/react";
-import { useLeads } from "@/store/LeadsContext";
+import { useData } from "@/store/DataContext";
 
 const categories = [
 	{
@@ -11,7 +11,7 @@ const categories = [
 ];
 
 export default function LeadTabs() {
-	const { isLoading, error } = useLeads();
+	const { isLoading, error } = useData();
 
 	return (
 		<div className="w-full md:w-fit">

@@ -1,7 +1,9 @@
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
+import { useData } from "@/store/DataContext";
 import type { Lead } from "@/types/leads";
 import { OpportunityStage } from "@/types/opportunity";
 import { type ConvertLeadSchema, convertLeadSchema } from "@/utils/schemas/convert-lead";
+import { _validateFormComplete } from "@/utils/validate-form";
 import { GraphUpArrow } from "./icons/graph-up-arrow";
 import { Button } from "./ui/button";
 import {
@@ -17,29 +19,12 @@ import { Input } from "./ui/input";
 import { Option, Select, SelectContent, SelectTrigger } from "./ui/select";
 import { Textarea } from "./ui/textarea";
 
-interface ConvertLeadDialogProps {
+interface Props {
 	lead: Lead;
-	onConvert?: (leadId: number, data: ConvertLeadSchema) => void;
 }
 
-function validateConvertForm(data: ConvertLeadSchema): Record<string, string> {
-	const result = convertLeadSchema.safeParse(data);
-
-	if (result.success) {
-		return {};
-	}
-
-	const errors: Record<string, string> = {};
-
-	result.error.issues.forEach((issue) => {
-		const field = issue.path[0] as string;
-		errors[field] = issue.message;
-	});
-
-	return errors;
-}
-
-export function ConvertLeadDialog({ lead, onConvert }: ConvertLeadDialogProps) {
+export function ConvertLeadDialog({ lead }: Props) {
+	const { convertLead } = useData();
 	const [open, setOpen] = useState(false);
 
 	const nameId = useId();
@@ -50,7 +35,7 @@ export function ConvertLeadDialog({ lead, onConvert }: ConvertLeadDialogProps) {
 	const notesId = useId();
 
 	const [formData, setFormData] = useState<ConvertLeadSchema>({
-		name: "",
+		name: `${lead.company} - ${lead.name}`,
 		stage: OpportunityStage.PROSPECTING,
 		amount: "",
 		accountName: lead.company,
@@ -58,14 +43,14 @@ export function ConvertLeadDialog({ lead, onConvert }: ConvertLeadDialogProps) {
 		expectedCloseDate: "",
 	});
 
-	const [errors, setErrors] = useState<Record<string, string>>({});
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [errors, setErrors] = useState<Record<string, string>>({});
 
-	const handleSubmit = async (e: React.FormEvent) => {
+	async function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
 		e.stopPropagation();
 
-		const validationErrors = validateConvertForm(formData);
+		const validationErrors = _validateFormComplete<ConvertLeadSchema>(convertLeadSchema, formData);
 
 		setErrors(validationErrors);
 
@@ -76,8 +61,15 @@ export function ConvertLeadDialog({ lead, onConvert }: ConvertLeadDialogProps) {
 		setIsSubmitting(true);
 
 		try {
-			await onConvert?.(lead.id, formData);
-			setOpen(false);
+			await new Promise(resolve => setTimeout(resolve, 300));
+			
+			convertLead(lead.id, {
+				name: formData.name,
+				stage: formData.stage,
+				amount: formData.amount ? Number(formData.amount) : undefined,
+				accountName: formData.accountName,
+			});
+
 			setFormData({
 				name: "",
 				stage: OpportunityStage.PROSPECTING,
@@ -87,12 +79,13 @@ export function ConvertLeadDialog({ lead, onConvert }: ConvertLeadDialogProps) {
 				expectedCloseDate: "",
 			});
 			setErrors({});
+			setOpen(false);
 		} catch (error) {
 			console.error("Failed to convert lead:", error);
 		} finally {
 			setIsSubmitting(false);
 		}
-	};
+	}
 
 	function handleCancel() {
 		setOpen(false);
@@ -106,6 +99,12 @@ export function ConvertLeadDialog({ lead, onConvert }: ConvertLeadDialogProps) {
 		});
 		setErrors({});
 	}
+
+	useEffect(() => {
+		if (!open) {
+			setErrors({});
+		}
+	}, [open]);
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
@@ -121,8 +120,8 @@ export function ConvertLeadDialog({ lead, onConvert }: ConvertLeadDialogProps) {
 				</DialogHeader>
 
 				<form onSubmit={handleSubmit}>
-					<DialogBody className="space-y-4">
-						<div className="space-y-2">
+				<DialogBody className="space-y-4">
+					<div className="space-y-2">
 							<label htmlFor={nameId} className="text-sm font-medium text-input block">
 								Opportunity Name <span className="text-destructive">*</span>
 							</label>

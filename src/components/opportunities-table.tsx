@@ -1,5 +1,4 @@
-import { useLeads } from "@/store/LeadsContext";
-import type { Opportunity } from "@/types/opportunity";
+import { useData } from "@/store/DataContext";
 import { nameFormatter } from "@/utils/nameFormatter";
 import { getStageColor } from "@/utils/stage-colors";
 import { Badge } from "./ui/badge";
@@ -8,11 +7,7 @@ import { Skeleton } from "./ui/skeleton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table";
 
 export function OpportunitiesTable() {
-	const { data: leads, error, isLoading } = useLeads();
-
-	const opportunities = leads.filter(
-		(lead) => lead.status === "Converted",
-	) as unknown as Opportunity[];
+	const { opportunities, error, isLoading } = useData();
 
 	if (error) {
 		return (
