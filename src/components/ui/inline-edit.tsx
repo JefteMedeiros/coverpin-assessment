@@ -48,4 +48,3 @@ export function InlineEditSelect({ id, value, onChange, error }: InlineEditSelec
 		</div>
 	);
 }
-

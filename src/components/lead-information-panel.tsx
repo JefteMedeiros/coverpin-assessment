@@ -34,7 +34,7 @@ export function LeadInformationPanel({
 	const emailId = useId();
 	const statusId = useId();
 
-  const [formData, setFormData] = useState<EditLeadSchema>({
+	const [formData, setFormData] = useState<EditLeadSchema>({
 		email: selectedLead?.email || "",
 		status: selectedLead?.status || LeadStatus.NEW,
 	});
@@ -92,8 +92,8 @@ export function LeadInformationPanel({
 		setSuccessMessage(null);
 
 		try {
-			await new Promise(resolve => setTimeout(resolve, 300));
-			
+			await new Promise((resolve) => setTimeout(resolve, 300));
+
 			updateLead(selectedLead.id, {
 				email: formData.email,
 				status: formData.status,
@@ -157,7 +157,9 @@ export function LeadInformationPanel({
 							<InformationCard title="Contact Information" icon={<Envelope className="w-5 h-5" />}>
 								<CardItem label="Name" content={currentLead.name} />
 								<div className="space-y-1">
-									<label htmlFor={emailId} className="text-sm text-muted-foreground">Email</label>
+									<label htmlFor={emailId} className="text-sm text-muted-foreground">
+										Email
+									</label>
 									{isEditing ? (
 										<InlineEditEmail
 											id={emailId}
@@ -175,7 +177,9 @@ export function LeadInformationPanel({
 							<InformationCard title="Lead Status" icon={<People className="w-5 h-5" />}>
 								<CardItem label="Source" content={currentLead.source} />
 								<div className="space-y-1">
-									<label htmlFor={statusId} className="text-sm block text-muted-foreground">Status</label>
+									<label htmlFor={statusId} className="text-sm block text-muted-foreground">
+										Status
+									</label>
 									{isEditing ? (
 										<InlineEditSelect
 											id={statusId}
@@ -229,9 +233,9 @@ export function LeadInformationPanel({
 										<Pencil className="w-5 h-5" />
 										Edit Lead Details
 									</Button>
-                  {currentLead.status !== LeadStatus.CONVERTED && (
-                    <ConvertLeadDialog lead={currentLead} />
-                  )}
+									{currentLead.status !== LeadStatus.CONVERTED && (
+										<ConvertLeadDialog lead={currentLead} />
+									)}
 								</div>
 							)}
 						</div>

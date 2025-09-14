@@ -1,6 +1,9 @@
 import type { ZodObject } from "zod";
 
-export function _validateFormComplete<T = unknown>(schema: ZodObject, data: T): Record<string, string> {
+export function _validateFormComplete<T = unknown>(
+	schema: ZodObject,
+	data: T,
+): Record<string, string> {
 	const result = schema.safeParse(data);
 
 	if (result.success) {

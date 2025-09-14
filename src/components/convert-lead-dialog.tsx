@@ -56,8 +56,8 @@ export function ConvertLeadDialog({ lead }: Props) {
 		setIsSubmitting(true);
 
 		try {
-			await new Promise(resolve => setTimeout(resolve, 300));
-			
+			await new Promise((resolve) => setTimeout(resolve, 300));
+
 			convertLead(lead.id, {
 				name: formData.name,
 				stage: formData.stage,
@@ -111,8 +111,8 @@ export function ConvertLeadDialog({ lead }: Props) {
 				</DialogHeader>
 
 				<form onSubmit={handleSubmit}>
-				<DialogBody className="space-y-4">
-					<div className="space-y-2">
+					<DialogBody className="space-y-4">
+						<div className="space-y-2">
 							<label htmlFor={nameId} className="text-sm font-medium text-input block">
 								Opportunity Name <span className="text-destructive">*</span>
 							</label>
@@ -182,7 +182,6 @@ export function ConvertLeadDialog({ lead }: Props) {
 								<p className="text-xs text-destructive">{errors.accountName}</p>
 							)}
 						</div>
-
 					</DialogBody>
 
 					<DialogFooter>
