@@ -41,8 +41,8 @@ function validateConvertForm(data: ConvertLeadSchema): Record<string, string> {
 
 export function ConvertLeadDialog({ lead, onConvert }: ConvertLeadDialogProps) {
 	const [open, setOpen] = useState(false);
-  
-  const nameId = useId();
+
+	const nameId = useId();
 	const stageId = useId();
 	const amountId = useId();
 	const accountNameId = useId();
@@ -63,10 +63,10 @@ export function ConvertLeadDialog({ lead, onConvert }: ConvertLeadDialogProps) {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		e.stopPropagation(); 
+		e.stopPropagation();
 
 		const validationErrors = validateConvertForm(formData);
-    
+
 		setErrors(validationErrors);
 
 		if (Object.keys(validationErrors).length > 0) {
@@ -115,7 +115,9 @@ export function ConvertLeadDialog({ lead, onConvert }: ConvertLeadDialogProps) {
 			</DialogTrigger>
 			<DialogContent className="bg-zinc-800 max-w-xl w-full backdrop-blur-sm border-border/50 max-h-[95dvh] overflow-auto">
 				<DialogHeader>
-					<DialogTitle className="text-xl font-semibold text-input">Convert Lead to Opportunity</DialogTitle>
+					<DialogTitle className="text-xl font-semibold text-input">
+						Convert Lead to Opportunity
+					</DialogTitle>
 				</DialogHeader>
 
 				<form onSubmit={handleSubmit}>
@@ -141,7 +143,9 @@ export function ConvertLeadDialog({ lead, onConvert }: ConvertLeadDialogProps) {
 							</label>
 							<Select
 								value={formData.stage}
-								onChange={(value) => setFormData((prev) => ({ ...prev, stage: value as OpportunityStage }))}
+								onChange={(value) =>
+									setFormData((prev) => ({ ...prev, stage: value as OpportunityStage }))
+								}
 							>
 								<SelectTrigger id={stageId} aria-invalid={!!errors.stage}>
 									{formData.stage}
@@ -184,7 +188,9 @@ export function ConvertLeadDialog({ lead, onConvert }: ConvertLeadDialogProps) {
 								onChange={(e) => setFormData((prev) => ({ ...prev, accountName: e.target.value }))}
 								aria-invalid={!!errors.accountName}
 							/>
-							{errors.accountName && <p className="text-xs text-destructive">{errors.accountName}</p>}
+							{errors.accountName && (
+								<p className="text-xs text-destructive">{errors.accountName}</p>
+							)}
 						</div>
 
 						<div className="space-y-2">

@@ -94,7 +94,8 @@ export function LeadInformationPanel({
 
 		try {
 			// TEMPORARY: Simulate a failure for testing
-			if (Math.random() > 0.3) { // 70% chance of "failure"
+			if (Math.random() > 0.3) {
+				// 70% chance of "failure"
 				throw new Error("Simulated network error");
 			}
 

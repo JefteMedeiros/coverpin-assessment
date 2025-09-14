@@ -4,14 +4,7 @@ import { Input } from "./ui/input";
 import { Option, Select, SelectContent, SelectTrigger } from "./ui/select";
 
 export function LeadFilters() {
-	const { 
-		isLoading, 
-		error, 
-		searchTerm, 
-		setSearchTerm, 
-		statusFilter, 
-		setStatusFilter 
-	} = useLeads();
+	const { isLoading, error, searchTerm, setSearchTerm, statusFilter, setStatusFilter } = useLeads();
 
 	const values = Object.values(LeadStatus);
 	const ALL_STATUS = "All Status";
@@ -29,14 +22,18 @@ export function LeadFilters() {
 
 	return (
 		<div className="flex flex-col md:flex-row items-center w-full gap-2">
-			<Input 
-				disabled={isLoading || !!error} 
-				className="w-full md:max-w-3/4" 
-				placeholder="Search by name or company..." 
+			<Input
+				disabled={isLoading || !!error}
+				className="w-full md:max-w-3/4"
+				placeholder="Search by name or company..."
 				value={searchTerm}
 				onChange={handleSearchChange}
 			/>
-			<Select disabled={isLoading || !!error} value={displayStatusValue} onChange={handleStatusChange}>
+			<Select
+				disabled={isLoading || !!error}
+				value={displayStatusValue}
+				onChange={handleStatusChange}
+			>
 				<SelectTrigger className="w-full md:max-w-1/4">{displayStatusValue}</SelectTrigger>
 				<SelectContent>
 					<Option key={ALL_STATUS} value={ALL_STATUS}>

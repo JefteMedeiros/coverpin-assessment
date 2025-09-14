@@ -13,7 +13,7 @@ export const convertLeadSchema = z.object({
 			message: "Amount must be a positive number",
 		}),
 	accountName: z.string().min(1, "Account name is required"),
-	
+
 	notes: z.string().min(1, "Conversion notes are required"),
 	expectedCloseDate: z.string().min(1, "Expected close date is required"),
 });

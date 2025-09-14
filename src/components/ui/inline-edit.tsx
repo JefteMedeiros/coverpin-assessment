@@ -47,10 +47,9 @@ export function InlineEditSelect({ value, onChange, error }: InlineEditSelectPro
 	);
 }
 
-
 export function validateFormComplete(data: EditLeadSchema): Record<string, string> {
 	const result = editLeadSchema.safeParse(data);
-	
+
 	if (result.success) {
 		return {};
 	}
@@ -61,6 +60,6 @@ export function validateFormComplete(data: EditLeadSchema): Record<string, strin
 		const field = issue.path[0] as string;
 		errors[field] = issue.message;
 	});
-	
+
 	return errors;
 }

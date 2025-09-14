@@ -54,7 +54,7 @@ export function LeadsProvider({ children }: { children: React.ReactNode }) {
 			filtered = filtered.filter(
 				(lead) =>
 					lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-					lead.company.toLowerCase().includes(searchTerm.toLowerCase())
+					lead.company.toLowerCase().includes(searchTerm.toLowerCase()),
 			);
 		}
 
@@ -74,18 +74,18 @@ export function LeadsProvider({ children }: { children: React.ReactNode }) {
 	}, [loadLeads]);
 
 	return (
-		<LeadsContext.Provider 
-			value={{ 
-				data: filteredAndSortedData, 
-				isLoading: loading, 
-				error, 
+		<LeadsContext.Provider
+			value={{
+				data: filteredAndSortedData,
+				isLoading: loading,
+				error,
 				updateLead,
 				searchTerm,
 				setSearchTerm,
 				statusFilter,
 				setStatusFilter,
 				sortByScore,
-				sortDescending
+				sortDescending,
 			}}
 		>
 			{children}

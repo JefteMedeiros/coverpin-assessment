@@ -13,7 +13,7 @@ export function StatsCards() {
 	const stats = useMemo(() => {
 		if (!leads || error) return { total: "0", qualified: "0", converted: "0" };
 
-    const statusCounts = leads.reduce(
+		const statusCounts = leads.reduce(
 			(acc, lead) => {
 				acc[lead.status] = (acc[lead.status] || 0) + 1;
 				return acc;

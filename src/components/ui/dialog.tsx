@@ -78,7 +78,7 @@ export function DialogTrigger({
 
 	return (
 		<Button
-      type="button"
+			type="button"
 			onClick={() => onOpenChange(true)}
 			className={className}
 			variant={variant}
