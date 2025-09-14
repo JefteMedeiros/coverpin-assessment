@@ -17,7 +17,6 @@ import {
 } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { Option, Select, SelectContent, SelectTrigger } from "./ui/select";
-import { Textarea } from "./ui/textarea";
 
 interface Props {
 	lead: Lead;
@@ -31,16 +30,12 @@ export function ConvertLeadDialog({ lead }: Props) {
 	const stageId = useId();
 	const amountId = useId();
 	const accountNameId = useId();
-	const expectedCloseDateId = useId();
-	const notesId = useId();
 
 	const [formData, setFormData] = useState<ConvertLeadSchema>({
 		name: `${lead.company} - ${lead.name}`,
 		stage: OpportunityStage.PROSPECTING,
 		amount: "",
 		accountName: lead.company,
-		notes: "",
-		expectedCloseDate: "",
 	});
 
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -75,8 +70,6 @@ export function ConvertLeadDialog({ lead }: Props) {
 				stage: OpportunityStage.PROSPECTING,
 				amount: "",
 				accountName: lead.company,
-				notes: "",
-				expectedCloseDate: "",
 			});
 			setErrors({});
 			setOpen(false);
@@ -94,8 +87,6 @@ export function ConvertLeadDialog({ lead }: Props) {
 			stage: OpportunityStage.PROSPECTING,
 			amount: "",
 			accountName: lead.company,
-			notes: "",
-			expectedCloseDate: "",
 		});
 		setErrors({});
 	}
@@ -192,37 +183,6 @@ export function ConvertLeadDialog({ lead }: Props) {
 							)}
 						</div>
 
-						<div className="space-y-2">
-							<label htmlFor={expectedCloseDateId} className="text-sm font-medium text-input block">
-								Expected Close Date <span className="text-destructive">*</span>
-							</label>
-							<Input
-								id={expectedCloseDateId}
-								type="date"
-								value={formData.expectedCloseDate}
-								onChange={(e) =>
-									setFormData((prev) => ({ ...prev, expectedCloseDate: e.target.value }))
-								}
-								aria-invalid={!!errors.expectedCloseDate}
-							/>
-							{errors.expectedCloseDate && (
-								<p className="text-xs text-destructive">{errors.expectedCloseDate}</p>
-							)}
-						</div>
-
-						<div className="space-y-2">
-							<label htmlFor={notesId} className="text-sm font-medium text-input block">
-								Conversion Notes <span className="text-destructive">*</span>
-							</label>
-							<Textarea
-								id={notesId}
-								placeholder="Add notes about the conversion..."
-								value={formData.notes}
-								onChange={(e) => setFormData((prev) => ({ ...prev, notes: e.target.value }))}
-								aria-invalid={!!errors.notes}
-							/>
-							{errors.notes && <p className="text-xs text-destructive">{errors.notes}</p>}
-						</div>
 					</DialogBody>
 
 					<DialogFooter>
