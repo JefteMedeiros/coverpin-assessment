@@ -3,153 +3,172 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import leadsData from "@/assets/leads.json";
 import type { Lead, LeadStatus } from "@/types/leads";
 import type { Opportunity, OpportunityStage } from "@/types/opportunity";
+import {
+	loadFromStorage,
+	loadStatusFromStorage,
+	SEARCH_TERM_KEY,
+	STATUS_FILTER_KEY,
+	saveToStorage,
+} from "@/utils/localStorage";
 
 interface DataContextValue {
-  data: Lead[];
-  rawData: Lead[];
-  isLoading: boolean;
-  error: string | null;
-  updateLead: (id: number, updates: Partial<Lead>) => void;
-  searchTerm: string;
-  setSearchTerm: (term: string) => void;
-  statusFilter: LeadStatus | "ALL";
-  setStatusFilter: (status: LeadStatus | "ALL") => void;
-  sortByScore: () => void;
-  sortDescending: boolean;
-  opportunities: Opportunity[];
-  convertLead: (
-    leadId: number,
-    opportunityData: {
-      name: string;
-      stage: OpportunityStage;
-      amount?: number;
-      accountName: string;
-    },
-  ) => void;
+	data: Lead[];
+	rawData: Lead[];
+	isLoading: boolean;
+	error: string | null;
+	updateLead: (id: number, updates: Partial<Lead>) => void;
+	searchTerm: string;
+	setSearchTerm: (term: string) => void;
+	statusFilter: LeadStatus | "ALL";
+	setStatusFilter: (status: LeadStatus | "ALL") => void;
+	sortByScore: () => void;
+	sortDescending: boolean;
+	opportunities: Opportunity[];
+	convertLead: (
+		leadId: number,
+		opportunityData: {
+			name: string;
+			stage: OpportunityStage;
+			amount?: number;
+			accountName: string;
+		},
+	) => void;
 }
 
 const DataContext = createContext<DataContextValue | undefined>(undefined);
 
 export function DataProvider({ children }: { children: React.ReactNode }) {
-  const [rawData, setRawData] = useState<Lead[]>([]);
-  const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [statusFilter, setStatusFilter] = useState<LeadStatus | "ALL">("ALL");
-  const [sortDescending, setSortDescending] = useState(true);
+	const [rawData, setRawData] = useState<Lead[]>([]);
+	const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState<string | null>(null);
+	const [searchTerm, setSearchTerm] = useState(() => loadFromStorage(SEARCH_TERM_KEY, ""));
+	const [statusFilter, setStatusFilter] = useState<LeadStatus | "ALL">(() =>
+		loadStatusFromStorage(STATUS_FILTER_KEY, "ALL"),
+	);
+	const [sortDescending, setSortDescending] = useState(true);
 
-  const loadData = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      await new Promise((resolve) => setTimeout(resolve, 300));
-      setRawData(leadsData.leads as Lead[]);
-      setOpportunities(leadsData.opportunities as Opportunity[]);
-    } catch (_err) {
-      setError("Failed to load data");
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+	const loadData = useCallback(async () => {
+		try {
+			setLoading(true);
+			setError(null);
+			await new Promise((resolve) => setTimeout(resolve, 300));
+			setRawData(leadsData.leads as Lead[]);
+			setOpportunities(leadsData.opportunities as Opportunity[]);
+		} catch (_err) {
+			setError("Failed to load data");
+		} finally {
+			setLoading(false);
+		}
+	}, []);
 
-  const updateLead = useCallback((id: number, updates: Partial<Lead>): void => {
-    setRawData((prev) => prev.map((lead) => (lead.id === id ? { ...lead, ...updates } : lead)));
-  }, []);
+	const updateLead = useCallback((id: number, updates: Partial<Lead>): void => {
+		setRawData((prev) => prev.map((lead) => (lead.id === id ? { ...lead, ...updates } : lead)));
+	}, []);
 
-  const convertLead = useCallback(
-    (
-      leadId: number,
-      opportunityData: {
-        name: string;
-        stage: OpportunityStage;
-        amount?: number;
-        accountName: string;
-      },
-    ): void => {
-      const leadToConvert = rawData.find((lead) => lead.id === leadId);
-      if (!leadToConvert) {
-        console.error("Lead not found");
-        return;
-      }
+	const convertLead = useCallback(
+		(
+			leadId: number,
+			opportunityData: {
+				name: string;
+				stage: OpportunityStage;
+				amount?: number;
+				accountName: string;
+			},
+		): void => {
+			const leadToConvert = rawData.find((lead) => lead.id === leadId);
+			if (!leadToConvert) {
+				console.error("Lead not found");
+				return;
+			}
 
-      const newOpportunity: Opportunity = {
-        // In a real application, I would have used a better approach such as Crypto.RandomUUID()
-        id: Math.floor(Math.random() * 1000000),
-        name: opportunityData.name,
-        stage: opportunityData.stage,
-        amount: opportunityData.amount,
-        accountName: opportunityData.accountName,
-      };
+			const newOpportunity: Opportunity = {
+				// In a real application, I would have used a better approach such as Crypto.RandomUUID()
+				id: Math.floor(Math.random() * 1000000),
+				name: opportunityData.name,
+				stage: opportunityData.stage,
+				amount: opportunityData.amount,
+				accountName: opportunityData.accountName,
+			};
 
-      setOpportunities((prev) => [...prev, newOpportunity]);
+			setOpportunities((prev) => [...prev, newOpportunity]);
 
-      setRawData((prev) =>
-        prev.map((lead) =>
-          lead.id === leadId ? { ...lead, status: "Converted" as LeadStatus } : lead,
-        ),
-      );
-    },
-    [rawData],
-  );
+			setRawData((prev) =>
+				prev.map((lead) =>
+					lead.id === leadId ? { ...lead, status: "Converted" as LeadStatus } : lead,
+				),
+			);
+		},
+		[rawData],
+	);
 
-  const sortByScore = useCallback(() => {
-    setSortDescending((prev) => !prev);
-  }, []);
+	const sortByScore = useCallback(() => {
+		setSortDescending((prev) => !prev);
+	}, []);
 
-  const filteredAndSortedData = useMemo(() => {
-    let filtered = rawData;
+	const persistentSetSearchTerm = useCallback((term: string) => {
+		setSearchTerm(term);
+		saveToStorage(SEARCH_TERM_KEY, term);
+	}, []);
 
-    if (searchTerm) {
-      filtered = filtered.filter(
-        (lead) =>
-          lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          lead.company.toLowerCase().includes(searchTerm.toLowerCase()),
-      );
-    }
+	const persistentSetStatusFilter = useCallback((status: LeadStatus | "ALL") => {
+		setStatusFilter(status);
+		saveToStorage(STATUS_FILTER_KEY, status);
+	}, []);
 
-    if (statusFilter !== "ALL") {
-      filtered = filtered.filter((lead) => lead.status === statusFilter);
-    }
+	const filteredAndSortedData = useMemo(() => {
+		let filtered = rawData;
 
-    filtered = filtered.sort((a, b) => {
-      return sortDescending ? b.score - a.score : a.score - b.score;
-    });
+		if (searchTerm) {
+			filtered = filtered.filter(
+				(lead) =>
+					lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+					lead.company.toLowerCase().includes(searchTerm.toLowerCase()),
+			);
+		}
 
-    return filtered;
-  }, [rawData, searchTerm, statusFilter, sortDescending]);
+		if (statusFilter !== "ALL") {
+			filtered = filtered.filter((lead) => lead.status === statusFilter);
+		}
 
-  useEffect(() => {
-    loadData();
-  }, [loadData]);
+		filtered = filtered.sort((a, b) => {
+			return sortDescending ? b.score - a.score : a.score - b.score;
+		});
 
-  return (
-    <DataContext.Provider
-      value={{
-        data: filteredAndSortedData,
-        rawData,
-        isLoading: loading,
-        error,
-        updateLead,
-        searchTerm,
-        setSearchTerm,
-        statusFilter,
-        setStatusFilter,
-        sortByScore,
-        sortDescending,
-        opportunities,
-        convertLead,
-      }}
-    >
-      {children}
-    </DataContext.Provider>
-  );
+		return filtered;
+	}, [rawData, searchTerm, statusFilter, sortDescending]);
+
+	useEffect(() => {
+		loadData();
+	}, [loadData]);
+
+	return (
+		<DataContext.Provider
+			value={{
+				data: filteredAndSortedData,
+				rawData,
+				isLoading: loading,
+				error,
+				updateLead,
+				searchTerm,
+				setSearchTerm: persistentSetSearchTerm,
+				statusFilter,
+				setStatusFilter: persistentSetStatusFilter,
+				sortByScore,
+				sortDescending,
+				opportunities,
+				convertLead,
+			}}
+		>
+			{children}
+		</DataContext.Provider>
+	);
 }
 
 export const useData = (): DataContextValue => {
-  const context = useContext(DataContext);
-  if (!context) {
-    throw new Error("useData must be used within a DataProvider");
-  }
-  return context;
+	const context = useContext(DataContext);
+	if (!context) {
+		throw new Error("useData must be used within a DataProvider");
+	}
+	return context;
 };
