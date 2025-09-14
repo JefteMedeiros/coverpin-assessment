@@ -6,6 +6,7 @@ import type { Opportunity, OpportunityStage } from "@/types/opportunity";
 
 interface DataContextValue {
   data: Lead[];
+  rawData: Lead[];
   isLoading: boolean;
   error: string | null;
   updateLead: (id: number, updates: Partial<Lead>) => void;
@@ -126,6 +127,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     <DataContext.Provider
       value={{
         data: filteredAndSortedData,
+        rawData,
         isLoading: loading,
         error,
         updateLead,

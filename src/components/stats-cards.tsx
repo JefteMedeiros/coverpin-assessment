@@ -8,7 +8,7 @@ import { ErrorCard } from "./ui/error-card";
 import { StatsCard } from "./ui/stats-card";
 
 export function StatsCards() {
-	const { data: leads, isLoading, error } = useData();
+	const { rawData: leads, isLoading, error } = useData();
 
 	const stats = useMemo(() => {
 		if (!leads || error) return { total: "0", qualified: "0", converted: "0" };
