@@ -6,8 +6,8 @@ import {
 	TransitionChild,
 } from "@headlessui/react";
 import { createContext, Fragment, type ReactNode, useContext, useState } from "react";
+import { X } from "@/components/icons/x";
 import { cn } from "@/utils/cn";
-import { X } from "../icons/x";
 import { Button } from "./button";
 
 interface DialogContextType {

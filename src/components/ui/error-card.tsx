@@ -1,4 +1,4 @@
-import { Info } from "../icons/info";
+import { Info } from "@/components/icons/info";
 
 interface ErrorCardProps {
 	title: string;

@@ -1,8 +1,8 @@
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
 
 import { Fragment, type ReactNode } from "react";
+import { X } from "@/components/icons/x";
 import { cn } from "@/utils/cn";
-import { X } from "../icons/x";
 import { Separator } from "./separator";
 
 interface SlideOverPanelProps {
@@ -122,7 +122,7 @@ export function SlideOverFooter({
 	className?: string;
 }) {
 	return (
-		<div className={cn("mt-4 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end", className)}>
+		<div className={cn("flex flex-col-reverse gap-3 sm:flex-row sm:justify-end", className)}>
 			{children}
 		</div>
 	);

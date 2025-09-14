@@ -1,18 +1,19 @@
 import { LeadStatus } from "@/types/leads";
-import { type EditLeadSchema, editLeadSchema } from "@/utils/schemas/lead";
 import { Input } from "./input";
 import { Option, Select, SelectContent, SelectTrigger } from "./select";
 
 interface InlineEditEmailProps {
+	id?: string;
 	value: string;
 	onChange: (value: string) => void;
 	error?: string;
 }
 
-export function InlineEditEmail({ value, onChange, error }: InlineEditEmailProps) {
+export function InlineEditEmail({ id, value, onChange, error }: InlineEditEmailProps) {
 	return (
 		<div className="space-y-1">
 			<Input
+				id={id}
 				value={value}
 				onChange={(e) => onChange(e.target.value)}
 				placeholder="Enter email address"
@@ -24,16 +25,17 @@ export function InlineEditEmail({ value, onChange, error }: InlineEditEmailProps
 }
 
 interface InlineEditSelectProps {
+	id?: string;
 	value: LeadStatus;
 	onChange: (value: LeadStatus) => void;
 	error?: string;
 }
 
-export function InlineEditSelect({ value, onChange, error }: InlineEditSelectProps) {
+export function InlineEditSelect({ id, value, onChange, error }: InlineEditSelectProps) {
 	return (
 		<div className="space-y-1">
 			<Select value={value} onChange={(value) => onChange(value as LeadStatus)}>
-				<SelectTrigger>{value}</SelectTrigger>
+				<SelectTrigger id={id}>{value}</SelectTrigger>
 				<SelectContent>
 					{Object.values(LeadStatus).map((status) => (
 						<Option key={status} value={status}>
@@ -47,19 +49,3 @@ export function InlineEditSelect({ value, onChange, error }: InlineEditSelectPro
 	);
 }
 
-export function validateFormComplete(data: EditLeadSchema): Record<string, string> {
-	const result = editLeadSchema.safeParse(data);
-
-	if (result.success) {
-		return {};
-	}
-
-	const errors: Record<string, string> = {};
-
-	result.error.issues.forEach((issue) => {
-		const field = issue.path[0] as string;
-		errors[field] = issue.message;
-	});
-
-	return errors;
-}

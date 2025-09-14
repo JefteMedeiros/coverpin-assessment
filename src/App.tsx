@@ -3,11 +3,11 @@ import { Header } from "./components/header";
 import { LeadsTable } from "./components/leads-table";
 import { OpportunitiesTable } from "./components/opportunities-table";
 import { StatsCards } from "./components/stats-cards";
-import { LeadsProvider } from "./store/LeadsContext";
+import { DataProvider } from "./store/DataContext";
 
 function App() {
 	return (
-		<LeadsProvider>
+		<DataProvider>
 			<div className="bg-zinc-900 min-h-screen w-full">
 				<TabGroup>
 					<div className="max-w-7xl mx-auto py-10 pt-0 space-y-4 p-3">
@@ -24,7 +24,7 @@ function App() {
 					</div>
 				</TabGroup>
 			</div>
-		</LeadsProvider>
+		</DataProvider>
 	);
 }
 

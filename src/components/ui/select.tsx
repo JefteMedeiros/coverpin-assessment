@@ -1,7 +1,7 @@
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from "@headlessui/react";
+import { CheckIcon } from "@/components/icons/check";
+import { ChevronDown } from "@/components/icons/chevron-down";
 import { cn } from "@/utils/cn";
-import { CheckIcon } from "../icons/check";
-import { ChevronDown } from "../icons/chevron-down";
 
 interface SelectProps extends React.ComponentProps<typeof Listbox> {
 	className?: string;
